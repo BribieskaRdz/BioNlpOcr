@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <!-- Capture Mode -->
+
+
+    <!-- Camera Preview background -->
+
+    <SurfaceView
+        android:id="@+id/mezzofanti_preview_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true" />
+
+    <ImageView
+        android:id="@+id/ImageViewFlash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/DiezDP"
+        android:layout_marginTop="@dimen/DiezDP"
+        android:background="@drawable/shaperectangulargrisborderedondeadoabajo"
+        android:clickable="false"
+        android:src="@drawable/device_access_flash_on" />
+
+    <ImageView
+        android:id="@+id/imageViewShot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/DiezDP"
+        android:layout_marginRight="@dimen/DiezDP"
+        android:background="@drawable/shaperectangulargrisborderedondeadoabajo"
+        android:clickable="true"
+        android:src="@drawable/device_access_camera" />
+
+    <com.itwizard.mezzofanti.CustomImageButton
+        android:id="@+id/mezzofanti_button_camerabutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="13dip"
+        android:layout_marginTop="13dip"
+        android:background="@drawable/shape_titulo_insercion_game_gris"
+        android:visibility="gone" />
+
+    <!-- View finder for drawing camera rectangle and laser beam on focus -->
+
+
+    <!-- Layout for cool looking on camera preview -->
+
+    <com.itwizard.mezzofanti.CaptureLayout
+        android:id="@+id/mezzofanti_capturelayout_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/transparent"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/mezzofanti_cool_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/transparent"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <!-- Transparent frame -->
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@color/transparent" >
+        </FrameLayout>
+
+        <!-- Status text frame -->
+
+        <LinearLayout
+            android:id="@+id/mezzofanti_status_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:background="@color/Blanco"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:padding="4px"
+            android:visibility="gone" >
+
+            <com.itwizard.mezzofanti.CustomImageButton
+                android:id="@+id/mezzofanti_button_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <!-- Status text -->
+
+            <TextView
+                android:id="@+id/mezzofanti_status_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mezzofanti_msg_default_status"
+                android:textColor="@color/Blanco"
+                android:textSize="@dimen/DiezDP"
+                android:visibility="gone" />
+
+            <com.itwizard.mezzofanti.CustomImageButton
+                android:id="@+id/mezzofanti_button_delone"
+                android:layout_width="50px"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <com.itwizard.mezzofanti.CustomImageButton
+                android:id="@+id/mezzofanti_button_gotoresults"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <SlidingDrawer
+        android:id="@+id/slidingDrawer1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:content="@+id/content"
+        android:handle="@+id/handle"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shaperectangulargrisoscuroborderedondeadoabajo"
+            android:src="@drawable/navigation_previous_item" />
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:id="@+id/RealativeLayout_Sliding"
+				android:background="@color/Negro"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <ImageView
+                    android:id="@+id/ImageView02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="26dp"
+                    android:background="@drawable/shaperectangulargrisborderedondeadoabajo"
+                    android:clickable="true"
+                    android:src="@drawable/device_access_camera" />
+
+                <ImageView
+                    android:id="@+id/ImageView01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/ImageView02"
+                    android:layout_marginRight="70dp"
+                    android:layout_marginTop="36dp"
+                    android:background="@drawable/shape_producto_game_gris"
+                    android:clickable="true"
+                    android:src="@drawable/device_access_flash_on" />
+            </RelativeLayout>
+        </LinearLayout>
+    </SlidingDrawer>
+
+</RelativeLayout>

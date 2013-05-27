@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <dimen name="actionbar_height">45dip</dimen>
+    <dimen name="actionbar_item_height">45dip</dimen>
+    <dimen name="actionbar_item_width">45dip</dimen>
+    <dimen name="CincoDp">5dp</dimen>
+    <dimen name="TresDp">3dp</dimen>
+    <dimen name="CuarentaYCincoDP">45dp</dimen>
+    <dimen name="QuinceDP">15dp</dimen>
+    <dimen name="DiezDP">10dp</dimen>
+    <dimen name="MenosCincodp">-5dp</dimen>
+    <dimen name="TreintaYCincoDP">35dp</dimen>
+    <dimen name="TreintaDP">30dp</dimen>
+    <dimen name="SesentaYCuatro">64dip</dimen>
+    <dimen name="undp">1dp</dimen>
+    <dimen name="docedp">12dp</dimen>
+    <dimen name="standard_padding">8dip</dimen>
+  	<dimen name="half_padding">4dip</dimen>
+</resources>

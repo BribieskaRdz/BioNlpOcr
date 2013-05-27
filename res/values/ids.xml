@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ 
+ -->
+<resources>
+  <!-- Messages IDs -->
+  <item type="id" name="assetsmanager_installingdone"/>
+  <item type="id" name="assetsmanager_installingcorrupted"/>
+  
+  <item type="id" name="cameramanager_requestpicture"/>
+  <item type="id" name="cameramanager_focus_succeded"/>
+  <item type="id" name="cameramanager_focus_failed"/>
+  
+  <item type="id" name="downloadmanager_downloadFinishedError"/>
+  <item type="id" name="downloadmanager_downloadFinishedOK"/>
+  <item type="id" name="downloadmanager_unziping"/>
+  <item type="id" name="downloadmanager_downloadFinishedErrorSdcard"/>
+
+  <item type="id" name="preferences_MinWordConfidence"/>
+  <item type="id" name="preferences_MinOverallConfidence"/>
+  <item type="id" name="preferences_selectedLang2Download"/>
+
+  <item type="id" name="mezzofanti_ocrFinished"/>
+  <item type="id" name="mezzofanti_clickEditText"/>
+  <item type="id" name="mezzofanti_clickSelectText"/>  
+  <item type="id" name="mezzofanti_statusWord"/>
+  <item type="id" name="mezzofanti_statusSelection"/>
+  <item type="id" name="mezzofanti_statusEdit"/>
+  <item type="id" name="mezzofanti_invalidateView"/>
+  <item type="id" name="mezzofanti_startCamera"/>
+  <item type="id" name="mezzofanti_restartCaptureMode"/>
+  
+  <item type="id" name="installactivity_killApp"/>
+
+  <item type="id" name="resultsactivity_clickEditText"/>
+  <item type="id" name="resultsactivity_clickSelectText"/>  
+  <item type="id" name="resultsactivity_statusWord"/>
+  <item type="id" name="resultsactivity_statusSelection"/>
+  <item type="id" name="resultsactivity_statusEdit"/>
+  <item type="id" name="resultsactivity_invalidateView"/>
+  <item type="id" name="resultsactivity_startCamera"/>
+  <item type="id" name="resultsactivity_restartCaptureMode"/>
+  <item type="id" name="resultsactivity_displayWarning"/>
+
+
+  
+  <!--
+ Copyright (C) 2008 ZXing authors
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ -->
+  <item type="id" name="decode"/>
+  <item type="id" name="decode_failed"/>
+  <item type="id" name="decode_succeeded"/>
+  <item type="id" name="launch_product_query"/>
+  <item type="id" name="quit"/>
+  <item type="id" name="restart_preview"/>
+  <item type="id" name="return_scan_result"/>
+  
+
+
+
+  </resources>

@@ -1,0 +1,667 @@
+//package android.webservice;
+//
+//
+//import java.io.BufferedReader;
+//import java.io.InputStream;
+//import java.io.InputStreamReader;
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//import org.apache.http.HttpEntity;
+//import org.apache.http.HttpResponse;
+//import org.apache.http.NameValuePair;
+//import org.apache.http.auth.AuthScope;
+//import org.apache.http.auth.UsernamePasswordCredentials;
+//import org.apache.http.client.entity.UrlEncodedFormEntity;
+//import org.apache.http.client.methods.HttpPost;
+//import org.apache.http.impl.client.DefaultHttpClient;
+//import org.apache.http.message.BasicNameValuePair;
+//import org.apache.http.params.BasicHttpParams;
+//import org.apache.http.params.HttpConnectionParams;
+//import org.apache.http.params.HttpParams;
+//import org.json.JSONArray;
+//import org.json.JSONObject;
+//
+//import android.util.Log;
+//import android.widget.ProgressBar;
+//
+//
+//
+//
+//
+////Noninstantiable utility class
+//public final class callWebServiceJSON {
+//	
+//	private static String TAG = "WebServices";
+//	
+//
+//	
+////	static String urlstr = "http://172.40.10.243:8081/StoreTools/StoreTools.asmx";
+////	static String urlstr = "http://212.170.159.237:8081/StoreTools/StoreTools.asmx";
+//	
+//	private static int timeout = 19000;
+//	
+//	
+//		
+//	
+////	static String user = "mobiler";
+////	static String pass = "M0b1l3$";
+//	
+//	private callWebServiceJSON() {
+//			     throw new AssertionError();
+//			     
+//			     
+//		}
+//		
+//		
+//	
+//	public static  ArrayList<Producto> WS_getProductsFromRequest(ProgressBar progress_bar,String user,
+//			String pass, String urlstr, String tipo, Requester requester,
+//			RequestProductosTienda request)  {
+//
+//		
+//		
+//		   ArrayList<Producto> productos = new ArrayList<Producto>();
+//		
+////		Gson gson = new Gson();
+//		
+//		String[] respuestalimpia ;
+//
+//		urlstr = urlstr+"/GetProducts";
+//		
+//		 Log.e(TAG,"URL "+urlstr);
+//		
+//		try {
+//			
+////			{"RequesterItem":{"Code":"1234","Type":"ADMIN","Token":"A123QE8976A218798F"},"RequestItem":{"Top":"25","Page":"0","Type":"TIENDA","DateType":"SEMANA","CoordinatorId":"8","HeaderId":"012","Region":"ES"}}
+////			{"RequestItem":{"CoordinatorId":"8","Top":"25","Region":"ES","DateType":"SEMANA","HeaderId":"012","Type":"TIENDA","Page":"0"},"RequesterItem":{"Code":"1234","Type":"ADMIN","Token":"A123QE8976A218798F"}}
+//
+//			JSONObject object = new JSONObject();
+//		    		JSONObject Requester = new JSONObject();
+//
+//					    // put elements into the object as a key-value pair
+//					    Requester.put("Code", requester.getCode());
+//					    Requester.put("Type", requester.getType());
+//					    Requester.put("Token", requester.getToken());
+//
+//
+//			object.put("RequesterItem", Requester);
+//					    
+//				    // 2nd array for user information
+//				    JSONObject Request = new JSONObject();
+//
+//					    // Create Json Object using Facebook Data
+//					    Request.put("Top", request.getTop());
+//					    Request.put("Page", request.getPage());
+//					    Request.put("Sku", request.getSku());
+//					    Request.put("Name", request.getName());
+//					    
+//					    
+//					    
+//					    JSONObject Family = new JSONObject();
+//
+//						    // Create Json Object using Facebook Data
+//						    Family.put("Code", request.getFamily().getFamilyCode());
+//						    Family.put("Description", request.getFamily().getFamilyDescription());
+//						    
+//						    
+//						Request.put("ProductFamily",Family);
+//						
+//					    JSONObject Genre = new JSONObject();
+//
+//					    // Create Json Object using Facebook Data
+//					    Genre.put("Code", request.getGenre().getGenreCode());
+//					    Genre.put("Type", request.getGenre().getGenreType());
+//					    Genre.put("Description", request.getGenre().getGenreDescription());
+//					    
+//					    Request.put("ProductGenre",Genre);
+//					    
+//					    Request.put("Region", request.getRegion());
+//						    
+//
+//		    object.put("RequestItem", Request);
+//		    
+//		    Log.e(TAG,object.toString());
+//		    
+//		    
+//		    DefaultHttpClient httpclient = new DefaultHttpClient();
+//			HttpParams httpParameters = new BasicHttpParams();
+//			// Set the timeout in milliseconds until a connection is
+//			// established.
+//			// The default value is zero, that means the timeout is not used.
+//
+//			HttpConnectionParams.setConnectionTimeout(httpParameters, timeout);
+//			HttpConnectionParams.setSoTimeout(httpParameters, timeout);
+//			httpclient.setParams(httpParameters);
+//
+//			
+//			// Log.eTAG
+//			if (urlstr.contains("212.170.159.237")) {
+//				httpclient.getCredentialsProvider().setCredentials(
+//						new AuthScope("212.170.159.237", 8081),
+//						new UsernamePasswordCredentials(user, pass));
+//			} else {
+//				httpclient.getCredentialsProvider().setCredentials(
+//						new AuthScope("172.40.10.243", 8081),
+//						new UsernamePasswordCredentials(user, pass));
+//			}
+//			
+//		    
+//			HttpPost httppost = new HttpPost(urlstr);
+//			
+//				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+//				nameValuePairs.add(new BasicNameValuePair("request", object.toString()));
+//		        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+//
+//		        // Execute HTTP Post Request
+//		        HttpResponse response = httpclient.execute(httppost);
+//		        
+//		        Log.e(TAG,response.toString());
+//		        
+//		        HttpEntity entity = response.getEntity();
+//
+//		        InputStream inputStream = entity.getContent();
+//		        // json is UTF-8 by default i beleive
+//		        
+//		        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
+//		        StringBuilder sb = new StringBuilder();
+//
+//		        String line = null;
+//		        while ((line = reader.readLine()) != null)
+//		        {
+//		            sb.append(line + "\n");
+//		            Log.w(TAG, line);
+//		        }
+//
+//		        
+//		        Log.d(TAG, "RESPUESTA:"+sb.toString());
+//		        
+////		        RESPUESTA:<?xml version="1.0" encoding="utf-8"?>
+////		        <string xmlns="http://game.es">{"CoordinationRankingsNode":{"Items":[{"COLUMN_COLOUR":null,"NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"352","CABECERA_TIPO":"ALGECIRAS_P_EUR","CABECERA_COOR":"Alexandre Vieira","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"1(11)","PUNTOS":"83,79(68,94)","VENTAS_PRESUPUESTO":"12.598(85 %)","LFL":"20 %","LFL_N":"18 %","LFL_SM":"24 %","MARGEN":"27 % / 38 %","SM_UNIDADES_VENTAS":"349(41 %)","RATIO_COMPRAS_SM":"36,09","ALQUILER_VENTAS":"2,04","TARJETAS_RATIO":"34 / 370","VENTAS_TARJETA":"75,46 %","VENTAS_NOVEDADES":"4,46 %","SEGUROS_RATIO":"2 / 7","UNIDADES_CONSOLAS_RATIO":"28 / 450","RATIO_EXTENSION_VENTA":"92,86 %","RESERVAS_RATIO":"119 / 105","CONVERSION_RESERVAS":"60 %"},{"COLUMN_COLOUR":"#fbaf5d","NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"363","CABECERA_TIPO":"SAN_FERNAN_RAFA","CABECERA_COOR":"Alexandre Vieira","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"2(50)","PUNTOS":"81,23(60,49)","VENTAS_PRESUPUESTO":"6.633(98 %)","LFL":"39 %","LFL_N":"41 %","LFL_SM":"37 %","MARGEN":"27 % / 40 %","SM_UNIDADES_VENTAS":"281(39 %)","RATIO_COMPRAS_SM":"23,6","ALQUILER_VENTAS":"1,99","TARJETAS_RATIO":"9 / 736","VENTAS_TARJETA":"86,93 %","VENTAS_NOVEDADES":"7,52 %","SEGUROS_RATIO":" / #9e0039","UNIDADES_CONSOLAS_RATIO":"13 / 510","RATIO_EXTENSION_VENTA":"83,33 %","RESERVAS_RATIO":"58 / 114","CONVERSION_RESERVAS":"100 %"},{"COLUMN_COLOUR":"#fbaf5d","NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"142","CABECERA_TIPO":"MURCIA_THADER","CABECERA_COOR":"Carlos Isidro Hern‡ndez","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"3(=)","PUNTOS":"81,12(75,85)","VENTAS_PRESUPUESTO":"13.135(80 %)","LFL":"9 %","LFL_N":"-2 %","LFL_SM":"33 %","MARGEN":"29 % / 40 %","SM_UNIDADES_VENTAS":"499(40 %)","RATIO_COMPRAS_SM":"26,32","ALQUILER_VENTAS":"0,72#9e0039","TARJETAS_RATIO":"33 / 398","VENTAS_TARJETA":"76,25 %","VENTAS_NOVEDADES":"10,28 %","SEGUROS_RATIO":"3 / 4","UNIDADES_CONSOLAS_RATIO":"24 / 547","RATIO_EXTENSION_VENTA":"69,23 %","RESERVAS_RATIO":"128 / 102","CONVERSION_RESERVAS":"87 %"},{"COLUMN_COLOUR":null,"NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"11","CABECERA_TIPO":"OVIEDO","CABECERA_COOR":"Daniel Del Bosque","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"4(245)","PUNTOS":"80,79(35,53)","VENTAS_PRESUPUESTO":"11.174(102 %)","LFL":"22 %","LFL_N":"13 %","LFL_SM":"33 %","MARGEN":"29 % / 39 %","SM_UNIDADES_VENTAS":"451(46 %)","RATIO_COMPRAS_SM":"24,77","ALQUILER_VENTAS":"2,46","TARJETAS_RATIO":"24 / 465","VENTAS_TARJETA":"83,21 %","VENTAS_NOVEDADES":"9,57 %","SEGUROS_RATIO":"3 / 3","UNIDADES_CONSOLAS_RATIO":"17 / 657","RATIO_EXTENSION_VENTA":"112,50 %","RESERVAS_RATIO":"88 / 126","CONVERSION_RESERVAS":"75 %"},{"COLUMN_COLOUR":"#fbaf5d","NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"371","CABECERA_TIPO":"SEVILLA_ARCOS_2","CABECERA_COOR":"Reyes Romero","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"5(89)","PUNTOS":"80,18(54,08)","VENTAS_PRESUPUESTO":"9.141(90 %)","LFL":"29 %","LFL_N":"26 %","LFL_SM":"34 %","MARGEN":"27 % / 41 %","SM_UNIDADES_VENTAS":"304(34 %)","RATIO_COMPRAS_SM":"30,06","ALQUILER_VENTAS":"1,18","TARJETAS_RATIO":"17 / 537","VENTAS_TARJETA":"74,55 %","VENTAS_NOVEDADES":"9,67 %","SEGUROS_RATIO":"1 / 11#9e0039","UNIDADES_CONSOLAS_RATIO":"17 / 538","RATIO_EXTENSION_VENTA":"81,82 %","RESERVAS_RATIO":"71 / 128","CONVERSION_RESERVAS":"80 %"},{"COLUMN_COLOUR":"#9e0039","NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"165","CABECERA_TIPO":"CAN_BALLENA","CABECERA_COOR":"Imanol Nœ–ez","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"6(-1)","PUNTOS":"79,56(74,78)","VENTAS_PRESUPUESTO":"18.2
+////		        09-19 16:40:10.489: D/WebServices(24248): RESPUESTA LIMPIA :<?xml version="1.0" encoding="utf-8"?>
+////		        09-19 16:40:10.489: D/WebServices(24248): <string xmlns="http://game.es">{"CoordinationRankingsNode":{"Items":[{"COLUMN_COLOUR":null,"NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"352","CABECERA_TIPO":"ALGECIRAS_P_EUR","CABECERA_COOR":"Alexandre Vieira","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"1(11)","PUNTOS":"83,79(68,94)","VENTAS_PRESUPUESTO":"12.598(85 %)","LFL":"20 %","LFL_N":"18 %","LFL_SM":"24 %","MARGEN":"27 % / 38 %","SM_UNIDADES_VENTAS":"349(41 %)","RATIO_COMPRAS_SM":"36,09","ALQUILER_VENTAS":"2,04","TARJETAS_RATIO":"34 / 370","VENTAS_TARJETA":"75,46 %","VENTAS_NOVEDADES":"4,46 %","SEGUROS_RATIO":"2 / 7","UNIDADES_CONSOLAS_RATIO":"28 / 450","RATIO_EXTENSION_VENTA":"92,86 %","RESERVAS_RATIO":"119 / 105","CONVERSION_RESERVAS":"60 %"},{"COLUMN_COLOUR":"#fbaf5d","NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"363","CABECERA_TIPO":"SAN_FERNAN_RAFA","CABECERA_COOR":"Alexandre Vieira","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"2(50)","PUNTOS":"81,23(60,49)","VENTAS_PRESUPUESTO":"6.633(98 %)","LFL":"39 %","LFL_N":"41 %","LFL_SM":"37 %","MARGEN":"27 % / 40 %","SM_UNIDADES_VENTAS":"281(39 %)","RATIO_COMPRAS_SM":"23,6","ALQUILER_VENTAS":"1,99","TARJETAS_RATIO":"9 / 736","VENTAS_TARJETA":"86,93 %","VENTAS_NOVEDADES":"7,52 %","SEGUROS_RATIO":" / #9e0039","UNIDADES_CONSOLAS_RATIO":"13 / 510","RATIO_EXTENSION_VENTA":"83,33 %","RESERVAS_RATIO":"58 / 114","CONVERSION_RESERVAS":"100 %"},{"COLUMN_COLOUR":"#fbaf5d","NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"142","CABECERA_TIPO":"MURCIA_THADER","CABECERA_COOR":"Carlos Isidro Hern‡ndez","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"3(=)","PUNTOS":"81,12(75,85)","VENTAS_PRESUPUESTO":"13.135(80 %)","LFL":"9 %","LFL_N":"-2 %","LFL_SM":"33 %","MARGEN":"29 % / 40 %","SM_UNIDADES_VENTAS":"499(40 %)","RATIO_COMPRAS_SM":"26,32","ALQUILER_VENTAS":"0,72#9e0039","TARJETAS_RATIO":"33 / 398","VENTAS_TARJETA":"76,25 %","VENTAS_NOVEDADES":"10,28 %","SEGUROS_RATIO":"3 / 4","UNIDADES_CONSOLAS_RATIO":"24 / 547","RATIO_EXTENSION_VENTA":"69,23 %","RESERVAS_RATIO":"128 / 102","CONVERSION_RESERVAS":"87 %"},{"COLUMN_COLOUR":null,"NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"11","CABECERA_TIPO":"OVIEDO","CABECERA_COOR":"Daniel Del Bosque","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"4(245)","PUNTOS":"80,79(35,53)","VENTAS_PRESUPUESTO":"11.174(102 %)","LFL":"22 %","LFL_N":"13 %","LFL_SM":"33 %","MARGEN":"29 % / 39 %","SM_UNIDADES_VENTAS":"451(46 %)","RATIO_COMPRAS_SM":"24,77","ALQUILER_VENTAS":"2,46","TARJETAS_RATIO":"24 / 465","VENTAS_TARJETA":"83,21 %","VENTAS_NOVEDADES":"9,57 %","SEGUROS_RATIO":"3 / 3","UNIDADES_CONSOLAS_RATIO":"17 / 657","RATIO_EXTENSION_VENTA":"112,50 %","RESERVAS_RATIO":"88 / 126","CONVERSION_RESERVAS":"75 %"},{"COLUMN_COLOUR":"#fbaf5d","NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"371","CABECERA_TIPO":"SEVILLA_ARCOS_2","CABECERA_COOR":"Reyes Romero","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"5(89)","PUNTOS":"80,18(54,08)","VENTAS_PRESUPUESTO":"9.141(90 %)","LFL":"29 %","LFL_N":"26 %","LFL_SM":"34 %","MARGEN":"27 % / 41 %","SM_UNIDADES_VENTAS":"304(34 %)","RATIO_COMPRAS_SM":"30,06","ALQUILER_VENTAS":"1,18","TARJETAS_RATIO":"17 / 537","VENTAS_TARJETA":"74,55 %","VENTAS_NOVEDADES":"9,67 %","SEGUROS_RATIO":"1 / 11#9e0039","UNIDADES_CONSOLAS_RATIO":"17 / 538","RATIO_EXTENSION_VENTA":"81,82 %","RESERVAS_RATIO":"71 / 128","CONVERSION_RESERVAS":"80 %"},{"COLUMN_COLOUR":"#9e0039","NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"165","CABECERA_TIPO":"CAN_BALLENA","CABECERA_COOR":"Imanol Nœ–ez","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"6(-1)","PUNTOS":"79,56(74,78)","VENTAS_PRESUPUEST
+//
+//		        	
+//		        String result = sb.toString();
+//		        
+//		        try {
+//		        	
+//			        result = result.substring(result.indexOf("ProductsNode")-2,result.length());
+////			        result = result.replace("<string xmlns=", "");
+//			        result = result.replace("</string>", "");
+//
+//			        result = result.replace("\t", "");
+//			        result = result.replace("\n", "");
+//			        result = result.replace("\r", "");
+//			        
+//				} catch (Exception e) {
+//					// TODO: handle exception
+//				}
+//		        	
+//		        Log.d(TAG, "RESPUESTA LIMPIA :"+result);
+//		        
+//		        
+//		        result.replace("+", "_");
+//		        respuestalimpia = result.split(":");
+//		        for (int i = 0; i < respuestalimpia.length; i++) {
+//					Log.w(TAG,respuestalimpia[i]);
+//				}
+//		        
+//
+//		        
+//		        JSONObject jso = new JSONObject(result);
+//		        Log.w(TAG,"jso =   "+jso.toString());
+//		        
+//		        String totalRecs = jso.getString("ProductsNode");
+//		        Log.w(TAG,"jso =   "+totalRecs);
+//		        
+//		        
+//		        jso = new JSONObject(totalRecs);
+//		        JSONArray ja = jso.getJSONArray("Items");
+//		        
+//
+//		        for (int i = 0; i < ja.length(); i++) {
+//		        	
+//		        	if (progress_bar!=null) {
+//		        		progress_bar.setProgress(((i*100)/ja.length()));	
+//					}
+//		        	
+//		        	Producto producto = new Producto("", "", "", "", "", "", "", "", "", "", "", "", "", null, null, null, null, "", "", "");
+//		            
+//		        	JSONObject jsonSection = ja.getJSONObject(i);
+//
+//		        	producto.setSKU(jsonSection.getString("Sku"));
+//		        	
+//		        	
+//		        	Log.d(TAG,jsonSection.getString("Sku"));
+//
+//		        	
+//		        	
+//		        	producto.setEAN(jsonSection.getString("Ean"));
+//		        	producto.setName(jsonSection.getString("Name"));
+//		        	producto.setDescription(jsonSection.getString("Description"));
+//		        	
+//		        	producto.setOfficialPrice(jsonSection.getString("OfficialPrice"));
+//		        	producto.setPriceStoreNew(jsonSection.getString("StorePriceNew"));
+//		        	producto.setPriceStorePre(jsonSection.getString("StorePricePre"));
+//		        	producto.setPriceRefNew(jsonSection.getString("ReferencePriceNew"));
+//		        	producto.setPriceRefPre(jsonSection.getString("ReferencePricePre"));
+//
+//		        	producto.setStockNew(jsonSection.getString("StockNew"));
+//		        	producto.setStockPre(jsonSection.getString("StockPreAvailable"));
+//		        	producto.setStockPreTotal(jsonSection.getString("StockPreTotal"));
+//		        	
+//		        	producto.setPublisher(jsonSection.getString("Publisher"));
+//		        	
+//
+//		        	Points puntos = new Points("", "");
+//		        	
+//		        	String jsonPuntos = jsonSection.getString("ProductPoints");
+//		        	Log.w(TAG,"jsonFamily =   "+jsonPuntos.toString());
+//		        	JSONObject jpuntos = new JSONObject(jsonPuntos);
+//			        	puntos.setPointsNew(jpuntos.getString("PointsNew"));
+//			        	puntos.setPointsPre(jpuntos.getString("PointsPre"));
+//			        producto.setPoints(puntos);
+//		        	
+//		        	Family family = new Family("", "");
+//		        	
+//		        	String jsonFamily = jsonSection.getString("ProductFamily");
+//			        Log.w(TAG,"jsonFamily =   "+jsonFamily.toString());
+//			        JSONObject jFamily = new JSONObject(jsonFamily);
+//			        
+//				        family.setFamilyCode(jFamily.getString("Code"));
+//				        family.setFamilyDescription(jFamily.getString("Description"));
+//				    producto.setFamily(family);
+//				        
+//		        	Genre genre = new Genre("", "", "");
+//		        	
+//		        	String jsonGenre = jsonSection.getString("ProductGenre");
+//			        Log.w(TAG,"jsonGenre =   "+jsonGenre.toString());
+//			        JSONObject jGenre = new JSONObject(jsonGenre);
+//			        
+//				        genre.setGenreCode(jGenre.getString("Code"));
+//				        genre.setGenreDescription(jGenre.getString("Description"));
+//				        genre.setGenreType(jGenre.getString("Type"));
+//				    producto.setGenre(genre);
+//					       
+//				        
+//		        	Pegi pegi = new Pegi("", "");
+//		        	
+//		        	String jsonPegi = jsonSection.getString("ProductPegi");
+//			        Log.w(TAG,"jsonPegi =   "+jsonPegi.toString());
+//			        JSONObject jPegi = new JSONObject(jsonPegi);
+//			        
+//				        pegi.setPegiCode(jPegi.getString("Code"));
+//				        pegi.setPegiAge(jPegi.getString("Age"));
+//				   producto.setPegi(pegi);     
+//				       
+//				        
+//
+//		           //add it to sections list
+//		           productos.add(producto);
+//		           
+//		        }
+//
+//		        
+//			  
+//			return productos;
+//			
+//		} catch (Exception e) {
+//
+//			Log.e("GAME",
+//					"callWebService" + " - XML Pasing Excpetion = "
+//							+ e.getMessage());
+//			return null;
+//		}
+//
+//	}
+//			
+//	
+//	
+//	
+//	public static  ArrayList<Producto> WS_getProductsFromRequestExceptions(String user,
+//			String pass, String urlstr, String tipo, Requester requester,
+//			RequestProductosTienda request)  {
+//
+//		
+//		
+//		   ArrayList<Producto> productos = new ArrayList<Producto>();
+//		
+////		Gson gson = new Gson();
+//		
+//		String[] respuestalimpia ;
+//
+//		urlstr = urlstr+"/GetProducts";
+//		
+//		 Log.e(TAG,"URL "+urlstr);
+//		
+//		try {
+//			
+////			{"RequesterItem":{"Code":"1234","Type":"ADMIN","Token":"A123QE8976A218798F"},"RequestItem":{"Top":"25","Page":"0","Type":"TIENDA","DateType":"SEMANA","CoordinatorId":"8","HeaderId":"012","Region":"ES"}}
+////			{"RequestItem":{"CoordinatorId":"8","Top":"25","Region":"ES","DateType":"SEMANA","HeaderId":"012","Type":"TIENDA","Page":"0"},"RequesterItem":{"Code":"1234","Type":"ADMIN","Token":"A123QE8976A218798F"}}
+//
+//			JSONObject object = new JSONObject();
+//		    		JSONObject Requester = new JSONObject();
+//
+//					    // put elements into the object as a key-value pair
+//					    Requester.put("Code", requester.getCode());
+//					    Requester.put("Type", requester.getType());
+//					    Requester.put("Token", requester.getToken());
+//
+//
+//			object.put("RequesterItem", Requester);
+//					    
+//				    // 2nd array for user information
+//				    JSONObject Request = new JSONObject();
+//
+//					    // Create Json Object using Facebook Data
+//					    Request.put("Top", request.getTop());
+//					    Request.put("Page", request.getPage());
+//					    Request.put("Sku", request.getSku());
+//					    Request.put("Name", request.getName());
+//					    
+//					    
+//					    
+//					    JSONObject Family = new JSONObject();
+//
+//						    // Create Json Object using Facebook Data
+//						    Family.put("Code", request.getFamily().getFamilyCode());
+//						    Family.put("Description", request.getFamily().getFamilyDescription());
+//						    
+//						    
+//						Request.put("ProductFamily",Family);
+//						
+//					    JSONObject Genre = new JSONObject();
+//
+//					    // Create Json Object using Facebook Data
+//					    Genre.put("Code", request.getGenre().getGenreCode());
+//					    Genre.put("Type", request.getGenre().getGenreType());
+//					    Genre.put("Description", request.getGenre().getGenreDescription());
+//					    
+//					    Request.put("ProductGenre",Genre);
+//					    
+//					    Request.put("Region", request.getRegion());
+//						    
+//
+//		    object.put("RequestItem", Request);
+//		    
+//		    Log.e(TAG,object.toString());
+//		    
+//		    
+//		    DefaultHttpClient httpclient = new DefaultHttpClient();
+//			HttpParams httpParameters = new BasicHttpParams();
+//			// Set the timeout in milliseconds until a connection is
+//			// established.
+//			// The default value is zero, that means the timeout is not used.
+//
+//			HttpConnectionParams.setConnectionTimeout(httpParameters, timeout);
+//			HttpConnectionParams.setSoTimeout(httpParameters, timeout);
+//			httpclient.setParams(httpParameters);
+//
+//			
+//			// Log.eTAG
+//			if (urlstr.contains("212.170.159.237")) {
+//				httpclient.getCredentialsProvider().setCredentials(
+//						new AuthScope("212.170.159.237", 8081),
+//						new UsernamePasswordCredentials(user, pass));
+//			} else {
+//				httpclient.getCredentialsProvider().setCredentials(
+//						new AuthScope("172.40.10.243", 8081),
+//						new UsernamePasswordCredentials(user, pass));
+//			}
+//			
+//		    
+//			HttpPost httppost = new HttpPost(urlstr);
+//			
+//				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+//				nameValuePairs.add(new BasicNameValuePair("request", object.toString()));
+//		        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+//
+//		        // Execute HTTP Post Request
+//		        HttpResponse response = httpclient.execute(httppost);
+//		        
+//		        Log.e(TAG,response.toString());
+//		        
+//		        HttpEntity entity = response.getEntity();
+//
+//		        InputStream inputStream = entity.getContent();
+//		        // json is UTF-8 by default i beleive
+//		        
+//		        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
+//		        StringBuilder sb = new StringBuilder();
+//
+//		        String line = null;
+//		        while ((line = reader.readLine()) != null)
+//		        {
+//		            sb.append(line + "\n");
+//		            Log.w(TAG, line);
+//		        }
+//
+//		        
+//		        Log.d(TAG, "RESPUESTA:"+sb.toString());
+//		        
+////		        RESPUESTA:<?xml version="1.0" encoding="utf-8"?>
+////		        <string xmlns="http://game.es">{"CoordinationRankingsNode":{"Items":[{"COLUMN_COLOUR":null,"NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"352","CABECERA_TIPO":"ALGECIRAS_P_EUR","CABECERA_COOR":"Alexandre Vieira","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"1(11)","PUNTOS":"83,79(68,94)","VENTAS_PRESUPUESTO":"12.598(85 %)","LFL":"20 %","LFL_N":"18 %","LFL_SM":"24 %","MARGEN":"27 % / 38 %","SM_UNIDADES_VENTAS":"349(41 %)","RATIO_COMPRAS_SM":"36,09","ALQUILER_VENTAS":"2,04","TARJETAS_RATIO":"34 / 370","VENTAS_TARJETA":"75,46 %","VENTAS_NOVEDADES":"4,46 %","SEGUROS_RATIO":"2 / 7","UNIDADES_CONSOLAS_RATIO":"28 / 450","RATIO_EXTENSION_VENTA":"92,86 %","RESERVAS_RATIO":"119 / 105","CONVERSION_RESERVAS":"60 %"},{"COLUMN_COLOUR":"#fbaf5d","NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"363","CABECERA_TIPO":"SAN_FERNAN_RAFA","CABECERA_COOR":"Alexandre Vieira","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"2(50)","PUNTOS":"81,23(60,49)","VENTAS_PRESUPUESTO":"6.633(98 %)","LFL":"39 %","LFL_N":"41 %","LFL_SM":"37 %","MARGEN":"27 % / 40 %","SM_UNIDADES_VENTAS":"281(39 %)","RATIO_COMPRAS_SM":"23,6","ALQUILER_VENTAS":"1,99","TARJETAS_RATIO":"9 / 736","VENTAS_TARJETA":"86,93 %","VENTAS_NOVEDADES":"7,52 %","SEGUROS_RATIO":" / #9e0039","UNIDADES_CONSOLAS_RATIO":"13 / 510","RATIO_EXTENSION_VENTA":"83,33 %","RESERVAS_RATIO":"58 / 114","CONVERSION_RESERVAS":"100 %"},{"COLUMN_COLOUR":"#fbaf5d","NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"142","CABECERA_TIPO":"MURCIA_THADER","CABECERA_COOR":"Carlos Isidro Hern‡ndez","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"3(=)","PUNTOS":"81,12(75,85)","VENTAS_PRESUPUESTO":"13.135(80 %)","LFL":"9 %","LFL_N":"-2 %","LFL_SM":"33 %","MARGEN":"29 % / 40 %","SM_UNIDADES_VENTAS":"499(40 %)","RATIO_COMPRAS_SM":"26,32","ALQUILER_VENTAS":"0,72#9e0039","TARJETAS_RATIO":"33 / 398","VENTAS_TARJETA":"76,25 %","VENTAS_NOVEDADES":"10,28 %","SEGUROS_RATIO":"3 / 4","UNIDADES_CONSOLAS_RATIO":"24 / 547","RATIO_EXTENSION_VENTA":"69,23 %","RESERVAS_RATIO":"128 / 102","CONVERSION_RESERVAS":"87 %"},{"COLUMN_COLOUR":null,"NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"11","CABECERA_TIPO":"OVIEDO","CABECERA_COOR":"Daniel Del Bosque","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"4(245)","PUNTOS":"80,79(35,53)","VENTAS_PRESUPUESTO":"11.174(102 %)","LFL":"22 %","LFL_N":"13 %","LFL_SM":"33 %","MARGEN":"29 % / 39 %","SM_UNIDADES_VENTAS":"451(46 %)","RATIO_COMPRAS_SM":"24,77","ALQUILER_VENTAS":"2,46","TARJETAS_RATIO":"24 / 465","VENTAS_TARJETA":"83,21 %","VENTAS_NOVEDADES":"9,57 %","SEGUROS_RATIO":"3 / 3","UNIDADES_CONSOLAS_RATIO":"17 / 657","RATIO_EXTENSION_VENTA":"112,50 %","RESERVAS_RATIO":"88 / 126","CONVERSION_RESERVAS":"75 %"},{"COLUMN_COLOUR":"#fbaf5d","NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"371","CABECERA_TIPO":"SEVILLA_ARCOS_2","CABECERA_COOR":"Reyes Romero","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"5(89)","PUNTOS":"80,18(54,08)","VENTAS_PRESUPUESTO":"9.141(90 %)","LFL":"29 %","LFL_N":"26 %","LFL_SM":"34 %","MARGEN":"27 % / 41 %","SM_UNIDADES_VENTAS":"304(34 %)","RATIO_COMPRAS_SM":"30,06","ALQUILER_VENTAS":"1,18","TARJETAS_RATIO":"17 / 537","VENTAS_TARJETA":"74,55 %","VENTAS_NOVEDADES":"9,67 %","SEGUROS_RATIO":"1 / 11#9e0039","UNIDADES_CONSOLAS_RATIO":"17 / 538","RATIO_EXTENSION_VENTA":"81,82 %","RESERVAS_RATIO":"71 / 128","CONVERSION_RESERVAS":"80 %"},{"COLUMN_COLOUR":"#9e0039","NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"165","CABECERA_TIPO":"CAN_BALLENA","CABECERA_COOR":"Imanol Nœ–ez","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"6(-1)","PUNTOS":"79,56(74,78)","VENTAS_PRESUPUESTO":"18.2
+////		        09-19 16:40:10.489: D/WebServices(24248): RESPUESTA LIMPIA :<?xml version="1.0" encoding="utf-8"?>
+////		        09-19 16:40:10.489: D/WebServices(24248): <string xmlns="http://game.es">{"CoordinationRankingsNode":{"Items":[{"COLUMN_COLOUR":null,"NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"352","CABECERA_TIPO":"ALGECIRAS_P_EUR","CABECERA_COOR":"Alexandre Vieira","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"1(11)","PUNTOS":"83,79(68,94)","VENTAS_PRESUPUESTO":"12.598(85 %)","LFL":"20 %","LFL_N":"18 %","LFL_SM":"24 %","MARGEN":"27 % / 38 %","SM_UNIDADES_VENTAS":"349(41 %)","RATIO_COMPRAS_SM":"36,09","ALQUILER_VENTAS":"2,04","TARJETAS_RATIO":"34 / 370","VENTAS_TARJETA":"75,46 %","VENTAS_NOVEDADES":"4,46 %","SEGUROS_RATIO":"2 / 7","UNIDADES_CONSOLAS_RATIO":"28 / 450","RATIO_EXTENSION_VENTA":"92,86 %","RESERVAS_RATIO":"119 / 105","CONVERSION_RESERVAS":"60 %"},{"COLUMN_COLOUR":"#fbaf5d","NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"363","CABECERA_TIPO":"SAN_FERNAN_RAFA","CABECERA_COOR":"Alexandre Vieira","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"2(50)","PUNTOS":"81,23(60,49)","VENTAS_PRESUPUESTO":"6.633(98 %)","LFL":"39 %","LFL_N":"41 %","LFL_SM":"37 %","MARGEN":"27 % / 40 %","SM_UNIDADES_VENTAS":"281(39 %)","RATIO_COMPRAS_SM":"23,6","ALQUILER_VENTAS":"1,99","TARJETAS_RATIO":"9 / 736","VENTAS_TARJETA":"86,93 %","VENTAS_NOVEDADES":"7,52 %","SEGUROS_RATIO":" / #9e0039","UNIDADES_CONSOLAS_RATIO":"13 / 510","RATIO_EXTENSION_VENTA":"83,33 %","RESERVAS_RATIO":"58 / 114","CONVERSION_RESERVAS":"100 %"},{"COLUMN_COLOUR":"#fbaf5d","NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"142","CABECERA_TIPO":"MURCIA_THADER","CABECERA_COOR":"Carlos Isidro Hern‡ndez","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"3(=)","PUNTOS":"81,12(75,85)","VENTAS_PRESUPUESTO":"13.135(80 %)","LFL":"9 %","LFL_N":"-2 %","LFL_SM":"33 %","MARGEN":"29 % / 40 %","SM_UNIDADES_VENTAS":"499(40 %)","RATIO_COMPRAS_SM":"26,32","ALQUILER_VENTAS":"0,72#9e0039","TARJETAS_RATIO":"33 / 398","VENTAS_TARJETA":"76,25 %","VENTAS_NOVEDADES":"10,28 %","SEGUROS_RATIO":"3 / 4","UNIDADES_CONSOLAS_RATIO":"24 / 547","RATIO_EXTENSION_VENTA":"69,23 %","RESERVAS_RATIO":"128 / 102","CONVERSION_RESERVAS":"87 %"},{"COLUMN_COLOUR":null,"NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"11","CABECERA_TIPO":"OVIEDO","CABECERA_COOR":"Daniel Del Bosque","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"4(245)","PUNTOS":"80,79(35,53)","VENTAS_PRESUPUESTO":"11.174(102 %)","LFL":"22 %","LFL_N":"13 %","LFL_SM":"33 %","MARGEN":"29 % / 39 %","SM_UNIDADES_VENTAS":"451(46 %)","RATIO_COMPRAS_SM":"24,77","ALQUILER_VENTAS":"2,46","TARJETAS_RATIO":"24 / 465","VENTAS_TARJETA":"83,21 %","VENTAS_NOVEDADES":"9,57 %","SEGUROS_RATIO":"3 / 3","UNIDADES_CONSOLAS_RATIO":"17 / 657","RATIO_EXTENSION_VENTA":"112,50 %","RESERVAS_RATIO":"88 / 126","CONVERSION_RESERVAS":"75 %"},{"COLUMN_COLOUR":"#fbaf5d","NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"371","CABECERA_TIPO":"SEVILLA_ARCOS_2","CABECERA_COOR":"Reyes Romero","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"5(89)","PUNTOS":"80,18(54,08)","VENTAS_PRESUPUESTO":"9.141(90 %)","LFL":"29 %","LFL_N":"26 %","LFL_SM":"34 %","MARGEN":"27 % / 41 %","SM_UNIDADES_VENTAS":"304(34 %)","RATIO_COMPRAS_SM":"30,06","ALQUILER_VENTAS":"1,18","TARJETAS_RATIO":"17 / 537","VENTAS_TARJETA":"74,55 %","VENTAS_NOVEDADES":"9,67 %","SEGUROS_RATIO":"1 / 11#9e0039","UNIDADES_CONSOLAS_RATIO":"17 / 538","RATIO_EXTENSION_VENTA":"81,82 %","RESERVAS_RATIO":"71 / 128","CONVERSION_RESERVAS":"80 %"},{"COLUMN_COLOUR":"#9e0039","NUMBEROFITEMS":286,"CABECERA":"TIENDA","CABECERA_FECHA":"SEMANA","CABECERA_MATRIZ":null,"CABECERA_CODIGO":"165","CABECERA_TIPO":"CAN_BALLENA","CABECERA_COOR":"Imanol Nœ–ez","CODIGO_COORD":null,"TXT_APERTURA":"BEFORE 2010","RANKING":"6(-1)","PUNTOS":"79,56(74,78)","VENTAS_PRESUPUEST
+//
+//		        	
+//		        String result = sb.toString();
+//		        
+//		        try {
+//		        	
+//		        	
+////		        	result = result.substring(result.indexOf(">"),result.length());
+////		        	result = result.substring(result.indexOf(">"),result.length());
+//		        	
+//			        result = result.substring(result.indexOf("ProductsNode")-2,result.length());
+////			        result = result.replace("<string xmlns=", "");
+//			        result = result.replace("</string>", "");
+////			        
+////			        
+//			        result = result.replace("\t", "");
+//			        result = result.replace("\n", "");
+//			        result = result.replace("\r", "");
+////			        
+////			        result = result.replace("[", "");
+////			        
+////			        
+////			        result = result.replace(result.substring(result.indexOf("]")+2,result.length()), "");
+//			        
+//		        	
+//		        	
+//		        	
+//			        
+//				} catch (Exception e) {
+//					// TODO: handle exception
+//				}
+//		        	
+//		        Log.d(TAG, "RESPUESTA LIMPIA :"+result);
+//		        
+//		        
+//		        result.replace("+", "_");
+//		        respuestalimpia = result.split(":");
+//		        for (int i = 0; i < respuestalimpia.length; i++) {
+//					Log.w(TAG,respuestalimpia[i]);
+//				}
+//		        
+//		        
+//		        
+//		        
+////		        JSONArray jArray = jObject.getJSONArray(result);
+////		        JSONObject jObject = new JSONObject(result);
+//		        
+////		        String aJsonString = jObject.getString("ALQUILER_VENTAS");
+//		        
+//		    
+////		        JSONArray jArray = jObject.getJSONArray("{");
+//
+//		        
+//		        
+//		        
+//		        
+//		        
+////		        (Serialization)
+////		        BagOfPrimitives obj = new BagOfPrimitives();
+////		        Gson gson = new Gson();
+////		        String json = gson.toJson(obj);  
+////		        ==> json is {"value1":1,"value2":"abc"}
+//		        
+////		        (Deserialization)
+////		        BagOfPrimitives obj2 = gson.fromJson(json, BagOfPrimitives.class);   
+////		        ==> obj2 is just like obj
+//		        
+//		        
+////		        String json = gson.toJson(null);  
+//		        
+////		        Producto producto = new Producto("", "", "", "", "", "", "", "", "", "", "", "", "", null, null, null, null, "", "", "");
+////		        ArrayList<Producto> items  = gson.fromJson(result, ArrayList<Producto>.class); 
+//		        
+//		        
+//		        
+//		        
+////		        Type listOfTestObject = new TypeToken<List<Producto>>(){}.getType();
+////		        String s = gson.toJson(result, listOfTestObject);
+//
+//		        
+////		        List<Producto> list2 = gson.fromJson(result, new TypeToken<List<Producto>>() {}.getType());
+////		        ArrayList<Producto> items = (ArrayList<Producto>) list2;
+//
+//		        
+//		        
+//
+////		        String jsonStr = gson.toJson(result);
+////		        Producto test[] = gson.fromJson(jsonStr, Producto[].class);
+////		        
+////		        
+////		        
+////		        Log.w(TAG,test[0].getName());
+//		        
+//		        
+//		        
+//		        
+//		     
+//		        
+//		        JSONObject jso = new JSONObject(result);
+//		        Log.w(TAG,"jso =   "+jso.toString());
+//		        
+//		        String totalRecs = jso.getString("ProductsNode");
+//		        Log.w(TAG,"jso =   "+totalRecs);
+//		        
+//		        
+//		        jso = new JSONObject(totalRecs);
+//		        JSONArray ja = jso.getJSONArray("Items");
+//		        
+//
+//		        
+//
+////		        (Serialization)
+////		        BagOfPrimitives obj = new BagOfPrimitives();
+////		        Gson gson = new Gson();
+////		        String json = gson.toJson(obj);  
+////		        ==> json is {"value1":1,"value2":"abc"}
+//		        
+////		        (Deserialization)
+////		        BagOfPrimitives obj2 = gson.fromJson(json, BagOfPrimitives.class);   
+////		        ==> obj2 is just like obj
+//		        
+//		        
+//		        
+////		        Producto producto = new Producto("", "", "", "", "", "", "", "", "", "", "", "", "", null, null, null, null, "", "", "");
+////		        Producto[] items  = gson.fromJson(totalRecs, Producto[].class); 
+////		        
+////		        Log.w(TAG, "item = "+items[0].getName());
+//		        
+//		        
+//		        
+//		        
+//		        for (int i = 0; i < ja.length(); i++) {
+//		        	
+//		        	Producto producto = new Producto("", "", "", "", "", "", "", "", "", "", "", "", "", null, null, null, null, "", "", "");
+//		            
+//		        	JSONObject jsonSection = ja.getJSONObject(i);
+//
+//		        	producto.setSKU(jsonSection.getString("Sku"));
+//		        	
+//		        	
+//		        	Log.d(TAG,jsonSection.getString("Sku"));
+//
+//		        	
+//		        	
+//		        	producto.setEAN(jsonSection.getString("Ean"));
+//		        	producto.setName(jsonSection.getString("Name"));
+//		        	producto.setDescription(jsonSection.getString("Description"));
+//		        	
+//		        	producto.setOfficialPrice(jsonSection.getString("OfficialPrice"));
+////		        	producto.setSt(jsonSection.getString("StorePriceNew"));
+////		        	producto.setSKU(jsonSection.getString("StorePricePre"));
+//		        	
+////		        	producto.setReleaseDate(jsonSection.getString("ReferencePriceNew"));
+////		        	producto.setREfeSKU(jsonSection.getString("ReferencePricePre"));
+//		        	
+//		        	producto.setStockNew(jsonSection.getString("StockNew"));
+////		        	producto.setStoOfficialPrice(jsonSection.getString("StockPreAvailable"));
+////		        	producto.setSKU(jsonSection.getString("StockPreTotal"));
+//		        	
+//		        	
+//		        	Family family = new Family("", "");
+//		        	
+//		        	String jsonFamily = jsonSection.getString("ProductFamily");
+//			        Log.w(TAG,"jsonFamily =   "+jsonFamily.toString());
+//			        JSONObject jFamily = new JSONObject(jsonFamily);
+//			        
+//				        family.setFamilyCode(jFamily.getString("Code"));
+//				        family.setFamilyDescription(jFamily.getString("Description"));
+//			        
+//			
+//				        
+//		        	Genre genre = new Genre("", "", "");
+//		        	
+//		        	String jsonGenre = jsonSection.getString("ProductGenre");
+//			        Log.w(TAG,"jsonGenre =   "+jsonGenre.toString());
+//			        JSONObject jGenre = new JSONObject(jsonGenre);
+//			        
+//				        genre.setGenreCode(jGenre.getString("Code"));
+//				        genre.setGenreDescription(jGenre.getString("Description"));
+//				        genre.setGenreType(jGenre.getString("Type"));
+//					        
+//					       
+//				        
+//		        	Pegi pegi = new Pegi("", "");
+//		        	
+//		        	String jsonPegi = jsonSection.getString("ProductPegi");
+//			        Log.w(TAG,"jsonPegi =   "+jsonPegi.toString());
+//			        JSONObject jPegi = new JSONObject(jsonPegi);
+//			        
+//				        pegi.setPegiCode(jPegi.getString("Code"));
+//				        pegi.setPegiAge(jPegi.getString("Age"));
+//				        
+//				       
+//				        
+//
+//		           //add it to sections list
+//		           productos.add(producto);
+//		           
+//		        }
+//
+//		        
+//		        
+//			  
+//			return productos;
+//			
+//		} catch (Exception e) {
+//
+//			Log.e("GAME",
+//					"callWebService" + " - XML Pasing Excpetion = "
+//							+ e.getMessage());
+//			return null;
+//		}
+//
+//	}
+//	
+//	
+//	
+//			
+//}
+//
+//			     

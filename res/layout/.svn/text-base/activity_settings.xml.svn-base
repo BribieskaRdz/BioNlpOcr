@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shapestart"
+    tools:context=".ActivitMainMenu" >
+
+    <android.cordon.customviews.ActionBar
+        android:id="@+id/actionbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+    </android.cordon.customviews.ActionBar>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/actionBar1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:shadowColor="@color/Negro"
+        android:shadowDx="2"
+        android:text="Ajustes"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/Remedy_NaranjaRojizo"
+        android:textSize="@dimen/TreintaDP" />
+
+</RelativeLayout>

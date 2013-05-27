@@ -1,0 +1,194 @@
+package android.pfg.utils;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.webservice.Annotation_CLEiM;
+import android.webservice.callWebService;
+import android.widget.ImageView;
+import android.widget.TableLayout.LayoutParams;
+
+import com.example.uem.pfg.ocr_bce.android.ListdataActivity;
+import com.example.uem.pfg.ocr_bce.android.R;
+
+public class Async_Tasks {
+
+	
+	
+	public static class AsyncTask_Search_Concept_webservice extends AsyncTask<String,String,String> {
+		
+			
+			 private String TAG = getClass().getSimpleName();
+			
+			 private Dialog mDialog_Loading ;
+			 private Activity activity;
+			 private String concepto;
+			 private ArrayList<Annotation_CLEiM> items ;
+			 
+			 /**
+			  * Constructor
+			  */
+			public AsyncTask_Search_Concept_webservice(String concept,Activity Actividad) {
+				super();
+				// TODO Auto-generated constructor stub
+				this.concepto = concept;
+				this.activity = Actividad;
+				this.items = new ArrayList<Annotation_CLEiM>();
+				Log.w("AsyncTask_Search_Concept_webservice", "AsyncTask_Searching : "+concepto);
+				
+				mDialog_Loading = new Dialog(Actividad, android.R.style.Theme_Panel);
+				
+				final LayoutInflater inflater = activity.getLayoutInflater();
+	//						TextView tv_texto = (TextView) mDialog.findViewById(R.id.tv_texto);
+				
+				
+				View view = inflater.inflate(R.layout.custom_dialog_loading1, null);
+	//					tv.setText("");
+				
+	//					final EditText texto_Entrada = (EditText) view.findViewById(R.id.editText_texto_Entrada); //id defined in camera.xml
+				
+				
+				ImageView close = (ImageView) view.findViewById(R.id.imageViewClose); //id defined in camera.xml
+				close.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						mDialog_Loading.cancel();
+					}
+				});
+				
+				
+				mDialog_Loading.addContentView(view, new  LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+				mDialog_Loading.show();
+				
+				
+			}
+	
+	
+			@Override
+			protected void onPreExecute() {
+				// TODO Auto-generated method stub
+				super.onPreExecute();
+				Log.w("AsyncTask_Search_Concept_webservice", "onPreExecute : "+concepto);
+			}
+	
+	
+			@Override
+		    protected String doInBackground(String... background) {
+	//					 callWebService.WS_getProductsFromRequest("http://orion.esp.uem.es:8080/CLEiM/XMLServ?text=c%C3%A1ncer%20de%20pr%C3%B3stata%20prostate%20cancer");
+				 Log.w("AsyncTask_Search_Concept_webservice", "doInBackground : "+concepto);
+				 
+				 
+				 concepto = concepto.replace("\n", "");
+				 concepto = concepto.replace("\r", "");
+				 
+				 concepto = concepto.replace("  ", "");
+				 
+				 concepto = concepto.replace("...", "");
+				 concepto = concepto.replace("*", "");
+				 concepto = concepto.replace("{", "");
+				 concepto = concepto.replace("}", "");
+				 concepto = concepto.replace(";", "");
+				 
+				 concepto = concepto.replace("<", "");
+				 concepto = concepto.replace(">", "");
+				 
+				 concepto = concepto.replace("@", "");
+				 concepto = concepto.replace("-", "");
+				 concepto = concepto.replace("_", "");
+				 
+				 concepto = concepto.replace(".", "");
+				 concepto = concepto.replace("'", "");
+				 concepto = concepto.replace(",", "");
+				 
+				 
+				 concepto = concepto.replace(" ", "+");
+				 concepto = concepto.replace("++", "+");
+				 concepto = concepto.replace("++", "+");
+				 concepto = concepto.replace("+++", "+");
+				 concepto = concepto.replace("\"", "");
+				 
+				 Log.d(TAG, "--- --- --- "+concepto+" --- --- ---");
+				 
+	//					 concepto = concepto.replace("}", "");
+	//					 concepto = concepto.replace(";", "");
+	//					 concepto = concepto.replace(".", "");
+	//					 concepto = concepto.replace("*", "");
+	//					 concepto = concepto.replace("{", "");
+	//					 concepto = concepto.replace("}", "");
+	//					 concepto = concepto.replace(";", "");
+				 
+				 concepto = concepto.trim();
+	
+				 items = callWebService.WS_getCLEiM_Search_Concept(concepto);
+				 
+				 if (items!=null) {
+					 return "completado";
+				 }else{
+				 	return "-1";
+				 }
+		        
+		    }
+			
+	
+			 
+			
+			@Override
+			protected void onPostExecute(String result) {
+				// TODO Auto-generated method stub
+				super.onPostExecute(result);
+				
+				if (result!=null && result.equals("completado") && items!=null) {
+					
+					
+					Intent intent = new Intent(activity.getApplicationContext(), ListdataActivity.class);
+					intent.putExtra("items", items);
+					activity.startActivity(intent);
+					
+				} else if (result!=null && result.equals("-1")) {
+					
+				} else {
+	
+				}
+				
+				mDialog_Loading.cancel();
+				
+				
+			}
+			
+			@Override
+			protected void onProgressUpdate(String... values) {
+				// TODO Auto-generated method stub
+				super.onProgressUpdate(values);
+				Log.w(TAG, "progreso = "+values);
+			}
+			 
+			 @Override
+			protected void onCancelled() {
+				// TODO Auto-generated method stub
+				super.onCancelled();
+			}
+	
+	//				@Override
+	//				protected void onCancelled(String result) {
+	//					// TODO Auto-generated method stub
+	//					super.onCancelled(result);
+	//				}
+	
+		 
+	}
+
+	
+	
+	
+	
+	
+}

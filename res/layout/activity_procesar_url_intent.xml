@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shapestart"
+    tools:context=".ActivitMainMenu" >
+
+    <pfg.uem.biocon.customviews.ActionBar
+        android:id="@+id/actionbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+    </pfg.uem.biocon.customviews.ActionBar>
+
+    <EditText
+        android:id="@+id/editTextResultado"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/buttonProcesar"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/buttonProcesar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/boton_menu_azul"
+        android:text="Procesar"
+        android:textColor="@color/Blanco" />
+
+    <TextView
+        android:id="@+id/TextViewTexto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/progressBarGetHTML"
+        android:layout_below="@+id/actionbar"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="40dp"
+        android:shadowColor="@color/Negro"
+        android:shadowDx="2"
+        android:text="URL"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/Remedy_GrisVerde"
+        android:textSize="30sp" />
+
+    <ProgressBar
+        android:id="@+id/progressBarGetHTML"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonProcesar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="47dp"
+        android:visibility="invisible" />
+
+</RelativeLayout>

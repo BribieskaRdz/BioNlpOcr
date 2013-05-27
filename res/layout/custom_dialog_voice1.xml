@@ -1,0 +1,149 @@
+								<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:background="@color/transparent"
+				    android:orientation="vertical" >
+
+									<LinearLayout
+									    android:layout_width="match_parent"
+									    android:layout_height="wrap_content"
+									    android:layout_weight="0"
+									    android:orientation="vertical" >
+
+										<TextView
+										    android:id="@+id/textView3"
+										    android:layout_width="wrap_content"
+										    android:layout_height="wrap_content" />
+
+									</LinearLayout>
+
+									<RelativeLayout
+									    android:layout_width="match_parent"
+									    android:layout_height="wrap_content"
+									    android:layout_marginTop="3dp"
+									    android:layout_weight="0" >
+
+										<ScrollView
+										    android:id="@+id/scrollView1"
+										    android:layout_width="match_parent"
+										    android:layout_height="wrap_content"
+										    android:layout_weight="0" >
+
+										    <LinearLayout
+										        android:layout_width="match_parent"
+										        android:layout_height="match_parent"
+										        android:layout_marginBottom="10dp"
+										        android:layout_marginLeft="5dp"
+										        android:layout_marginRight="6dp"
+										        android:layout_marginTop="6dp"
+										        android:background="@drawable/shapesplash_stroke"
+										        android:orientation="vertical" >
+
+										        <LinearLayout
+										            android:layout_width="match_parent"
+										            android:layout_height="fill_parent"
+										            android:layout_weight="0"
+										            android:orientation="horizontal" >
+
+										            <ImageView
+										                android:layout_width="wrap_content"
+										                android:layout_height="wrap_content"
+										                android:contentDescription="@string/app_name"
+										                android:scaleType="center"
+										                android:src="@drawable/bionlpocr" />
+
+										            <LinearLayout
+										                android:layout_width="match_parent"
+										                android:layout_height="wrap_content"
+										                android:layout_weight="0"
+										                android:gravity="right" >
+										            </LinearLayout>
+										        </LinearLayout>
+
+										        <TextView
+										            android:id="@+id/tv_texto"
+										            android:layout_width="match_parent"
+										            android:layout_height="match_parent"
+										            android:layout_marginLeft="10dp"
+										            android:layout_weight="0"
+										            android:text="Buscar:"
+										            android:textColor="@color/Blanco"
+										            android:textSize="18dp" />
+
+										        <LinearLayout
+										            android:layout_width="match_parent"
+										            android:layout_height="wrap_content"
+										            android:layout_gravity="bottom"
+										            android:layout_weight="0"
+										            android:background="@drawable/shape_titulo_insercion_gris"
+										            android:orientation="horizontal" >
+
+										            <EditText
+										                android:id="@+id/editText_texto_Entrada"
+										                android:layout_width="wrap_content"
+										                android:layout_height="wrap_content"
+										                android:layout_gravity="bottom"
+										                android:layout_weight="1"
+										                android:ems="10"
+										                android:maxLines="3" />
+
+										            <ImageView
+										                android:id="@+id/imageViewVoz"
+										                android:layout_width="wrap_content"
+										                android:layout_height="wrap_content"
+										                android:background="@color/azul_biocon"
+										                android:clickable="true"
+										                android:padding="10dp"
+										                android:src="@drawable/device_access_mic" />
+
+										        </LinearLayout>
+
+										        <LinearLayout
+										            android:layout_width="match_parent"
+										            android:layout_height="wrap_content"
+										            android:layout_marginLeft="1dp"
+										            android:layout_marginRight="1dp"
+										            android:layout_marginTop="5dp"
+										            android:layout_weight="0"
+										            android:gravity="center" >
+
+										            <Button
+										                android:id="@+id/buttonSearch"
+										                android:layout_width="wrap_content"
+										                android:layout_height="wrap_content"
+										                android:layout_margin="5dp"
+										                android:layout_weight="0"
+										                android:background="@drawable/boton_azul"
+										                android:text="Buscar"
+										                android:textColor="#ffffff"
+										                android:textStyle="bold" />
+
+										        </LinearLayout>
+										    </LinearLayout>
+										</ScrollView>
+
+										<ImageView
+										    android:id="@+id/imageViewClose"
+										    android:layout_width="wrap_content"
+										    android:layout_height="wrap_content"
+										    android:layout_alignParentRight="true"
+										    android:layout_weight="0"
+										    android:clickable="true"
+										    android:src="@drawable/content_remove" />
+
+									</RelativeLayout>
+
+									<LinearLayout
+									    android:layout_width="match_parent"
+									    android:layout_height="wrap_content"
+									    android:layout_weight="0"
+									    android:orientation="vertical" >
+
+										<TextView
+										    android:id="@+id/textView2"
+										    android:layout_width="wrap_content"
+										    android:layout_height="wrap_content" />
+
+									</LinearLayout>
+
+	</LinearLayout>

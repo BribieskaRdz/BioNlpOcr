@@ -1,0 +1,230 @@
+package android.pfg.utils;
+
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLEncoder;
+
+import android.net.Uri;
+import android.util.Log;
+
+public class procesamientoCadenas {
+
+	
+	public static String procesaTextoDeImagen(String concepto){
+		
+		 concepto = concepto.replace("\n", "");
+		 concepto = concepto.replace("\r", "");
+		 concepto = concepto.replace("\t", "");
+		 
+		 concepto = concepto.replace("  ", "");
+		 
+		 concepto = concepto.replace("...", "");
+		 concepto = concepto.replace("*", "");
+		 concepto = concepto.replace("{", "");
+		 concepto = concepto.replace("}", "");
+		 concepto = concepto.replace(";", "");
+		 
+		 concepto = concepto.replace("<", "");
+		 concepto = concepto.replace(">", "");
+		 
+		 concepto = concepto.replace("@", "");
+		 concepto = concepto.replace("-", "");
+		 concepto = concepto.replace("_", "");
+		 
+		 concepto = concepto.replace(".", "");
+		 concepto = concepto.replace("'", "");
+		 concepto = concepto.replace(",", "");
+		 
+		 
+		 concepto = concepto.replace(" ", "+");
+		 concepto = concepto.replace("++", "+");
+		 concepto = concepto.replace("++", "+");
+		 concepto = concepto.replace("+++", "+");
+		 concepto = concepto.replace("\"", "");
+		 
+		 Log.d("procesamientoCadenas", "--- --- --- "+concepto+" --- --- ---");
+		 
+		 return concepto;
+		
+	}
+	
+	
+	
+	public static String procesaTextoDeHTML(String concepto){
+	
+		
+
+		
+		
+		try {
+			concepto = java.net.URLEncoder.encode(concepto, "utf-8");
+			
+//			concepto = String.format(concepto, Uri.encode("foo bar"), Uri.encode("100% fubar'd"));
+			
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			Log.w("procesaTextoDeHTML", e.getMessage());
+		} catch(Exception e){
+			e.printStackTrace();
+			
+		}
+		
+		
+
+		
+		
+
+
+		 
+		 
+		
+//		 concepto = concepto.replace("\n", "");
+//		 concepto = concepto.replace("\r", "");
+//		 concepto = concepto.replace("\t", "");
+//		 
+//		 
+//		 concepto = concepto.replace(" ", "%20");
+//		 
+//		 concepto = concepto.replace("...", "%20");
+//		 concepto = concepto.replace("*", "%20");
+//		 concepto = concepto.replace("{", "%20");
+//		 concepto = concepto.replace("}", "%20");
+//		 concepto = concepto.replace(";", "%20");
+//		 
+//		 concepto = concepto.replace("<", "%20");
+//		 concepto = concepto.replace(">", "%20");
+//		 
+//		 concepto = concepto.replace("@", "%20");
+//		 concepto = concepto.replace("-", "%20");
+//		 concepto = concepto.replace("_", "%20");
+//		 
+//		 concepto = concepto.replace(".", "%20");
+//		 concepto = concepto.replace("'", "%20");
+//		 concepto = concepto.replace(",", "%20");
+//		 
+//		
+//		 concepto = concepto.replace("\"", "%20");//Replace de ",  es un caracter especial se detecta  por \"
+//		 concepto = concepto.replace("\\", "%20"); //Replace de \,  es un caracter especial se detecta por \\  
+//		 
+//		 concepto = concepto.replace("!", "%20");
+//		 concepto = concepto.replace("=", "%20");
+//
+//		 
+//		 concepto = concepto.replace(":", "%20");
+//		 concepto = concepto.replace("/", "%20");
+//		 
+//		 concepto = concepto.replace("[", "%20");
+//		 concepto = concepto.replace("]", "%20");
+//		 
+//		 
+//		 concepto = concepto.replace("#", "%20");
+//		 
+//		 concepto = concepto.replace("#", "%20");
+//
+//		 
+//		 for (int i = 0; i < 10; i++) {
+//			 concepto = concepto.replace("     ", "%20");
+//			 concepto = concepto.replace("    ", "%20");
+//			 concepto = concepto.replace("   ", "%20");
+//			 concepto = concepto.replace("  ", "%20");
+//			 concepto = concepto.replace(" ", "%20");
+//		 }
+//		 
+//		 
+////		 for (int i = 0; i < 10; i++) {
+//			 concepto = concepto.replaceAll(" ", "%20");
+////		 }
+//		 
+//		 
+//		 
+////		 for (int i = 0; i < 10; i++) {
+////			 concepto = concepto.replace("%20%20%20%20%20", "%20");
+////			 concepto = concepto.replace("%20%20%20%20", "%20");
+////			 concepto = concepto.replace("%20%20%20", "%20");
+////			 concepto = concepto.replace("%20%20", "%20");
+////		 }
+//		 
+//		 
+//		 concepto = concepto.replace("Ê", "%20");
+//		 
+//		 
+//		 
+////		 for (int i = 0; i < 10; i++) {
+////			 concepto = concepto.replace("     ", "%20");
+////			 concepto = concepto.replace("    ", "%20");
+////			 concepto = concepto.replace("   ", "%20");
+////			 concepto = concepto.replace("  ", "%20");
+////			 concepto = concepto.replace(" ", "%20");
+////		 }
+//		 
+//		 
+////		 for (int i = 0; i < 10; i++) {
+////			 concepto = concepto.replace(" ", "%20");
+////		 }
+//		 
+//		 
+//		 
+////		 for (int i = 0; i < 10; i++) {
+////			 concepto = concepto.replace("%20%20%20%20%20", "%20");
+////			 concepto = concepto.replace("%20%20%20%20", "%20");
+////			 concepto = concepto.replace("%20%20%20", "%20");
+////			 concepto = concepto.replace("%20%20", "%20");
+////		 }
+//		 
+//		 
+//		 concepto = concepto.replace("%%", "");
+//		 
+//		 
+//		 
+//		
+//		 
+//		 
+////		 concepto = concepto.replace("‡", "a");
+//		 
+////		 concepto = concepto.replace(";", "");
+//
+//		 concepto = concepto.trim();
+//		 
+//		 
+//		 
+//			
+//			String query;
+//			try {
+//				concepto = URLEncoder.encode(concepto, "utf-8");
+//			} catch (UnsupportedEncodingException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+//			
+//		 
+//		 String urlStr = concepto;
+//		 URL url;
+//		try {
+//			url = new URL(urlStr);
+//			 URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
+//			 url = uri.toURL();
+//			 concepto=url.toString();
+//		} catch (MalformedURLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		} catch (URISyntaxException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}	
+			
+		 
+		 Log.d("procesamientoCadenas", "--- --- --- "+concepto+" --- --- ---");
+		 
+		 return concepto;
+		
+	}
+	
+	
+	
+}

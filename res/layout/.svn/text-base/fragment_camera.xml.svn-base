@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/shapestart" >
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:visibility="gone" >
+        </ListView>
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/navigation_back_pers" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/imageView1"
+            android:src="@drawable/navigation_next_pers" />
+
+        <ImageView
+            android:id="@+id/ImageViewGaleria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/CuarentaYCincoDP"
+            android:layout_marginLeft="@dimen/TresDp"
+            android:layout_marginRight="@dimen/TresDp"
+            android:background="@drawable/boton_remedy_verde"
+            android:padding="@dimen/docedp"
+            android:src="@drawable/collections_collection" />
+
+        <ImageView
+            android:id="@+id/ImageView05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ImageViewGaleria"
+            android:layout_marginRight="@dimen/TresDp"
+            android:layout_toRightOf="@+id/ImageViewGaleria"
+            android:background="@drawable/boton_remedy_verde"
+            android:padding="@dimen/docedp"
+            android:src="@drawable/collections_view_as_grid" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ImageViewGaleria"
+            android:layout_marginLeft="@dimen/TresDp"
+            android:layout_toLeftOf="@+id/ImageViewGaleria"
+            android:background="@drawable/boton_remedy_verde"
+            android:duplicateParentState="true"
+            android:padding="@dimen/docedp"
+            android:paddingLeft="@dimen/DiezDP"
+            android:src="@drawable/av_add_to_queue" />
+
+        <ImageView
+            android:id="@+id/ImageViewURL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageView4"
+            android:layout_toLeftOf="@+id/imageView4"
+            android:background="@drawable/boton_remedy_verde"
+            android:padding="@dimen/docedp"
+            android:src="@drawable/location_web_site" />
+
+        <ImageView
+            android:id="@+id/ImageView03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ImageView05"
+            android:layout_toRightOf="@+id/ImageView05"
+            android:background="@drawable/boton_remedy_verde"
+            android:padding="@dimen/docedp"
+            android:src="@drawable/collections_view_as_list" />
+
+        <ImageView
+            android:id="@+id/imageViewCamera_Ocr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/camera_iconsolo" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="37dp"
+            android:shadowColor="@color/Negro"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="2"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/Remedy_NaranjaRojizo"
+            android:textSize="@dimen/TreintaYCincoDP" />
+
+        <SlidingDrawer
+            android:id="@+id/slidingDrawer1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:content="@+id/content"
+            android:handle="@+id/handle"
+            android:visibility="visible" >
+
+            <ImageButton
+                android:id="@+id/handle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/remedy_slide_menu" />
+
+            <LinearLayout
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.9"
+                android:background="@drawable/boton_remedy_gris"
+                android:clickable="true" >
+
+                <ImageView
+                    android:id="@+id/ImageView01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/camera_iconsolo" />
+            </LinearLayout>
+        </SlidingDrawer>
+
+    </RelativeLayout>

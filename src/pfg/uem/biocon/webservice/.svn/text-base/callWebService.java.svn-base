@@ -1,0 +1,814 @@
+package android.webservice;
+
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+import android.util.Log;
+
+//Noninstantiable utility class
+public final class callWebService {
+
+	private static String TAG = "WebServices";
+
+
+	private static int timeout = 39000;
+
+
+	private callWebService() {
+		throw new AssertionError();
+	}
+
+	
+	
+//	public static ArrayList<Annotation> WS_getProductsFromRequest(String user,
+//			String pass, String urlstr, String tipo, Requester requester,
+//			RequestAnnotationsTienda request) {
+//
+//		ArrayList<Annotation> items = new ArrayList<Annotation>();
+//
+//		NodeList nodeList, nodeListStatus;
+//
+//		String itemProduct = "Product";
+//		String itemStatus = "Status";
+//
+//		try {
+//
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//		try {
+//
+//			String SOAPRequestXML = "";
+//
+//				SOAPRequestXML = "<?xml version='1.0' encoding='utf-8'?>"
+//						+ "<soap:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'>"
+//						+ "<soap:Body>" 
+//						+ "<Make xmlns='http://game.es'>"
+//							+ "<RemoteRequest>"
+//								+ "<Requester>" 
+//									+ "<Code>"
+//									+ requester.getCode()
+//									+ "</Code>"
+//									+ "<Type>"
+//									+ requester.getType()
+//									+ "</Type>"
+//									+ "<Token>"
+//									+ requester.getToken()
+//									+ "</Token>"
+//								+ "</Requester>"
+//									
+//									+ "<Top>"
+//									+ request.getTop()
+//									+ "<Top>"
+//									+ "<Page>"
+//									+ request.getPage()
+//									+ "</Page>"
+//									
+//									+"<Sku>"
+//									+request.getSku()
+//									+"</Sku>"
+//									
+//									+"<Name>"
+//									+ request.getName()
+//									+ "</Name>"
+//									
+//									+"<Family>"
+//										+"<Code>"
+//										+ request.getFamily().getFamilyCode()
+//										+ "</Code>"
+//										+"<Description>"
+//										+ request.getFamily().getFamilyDescription()
+//										+ "</Description>"
+//									+ "</Family>"
+//										
+//									+"<Genre>"
+//										+"<Code>"
+//										+ request.getGenre().getGenreCode()
+//										+ "</Code>"
+//										+"<Type>"
+//										+ request.getGenre().getGenreType()
+//										+ "</Type>"
+//										+"<Description>"
+//										+ request.getGenre().getGenreDescription()
+//										+ "</Description>"
+//									+ "</Genre>"
+//									
+//									
+//								+ "</Request>"
+//							+ "</RemoteRequest>"
+//						+ "</Make>"
+//						+ "</soap:Body>"
+//						+ "</soap:Envelope>";
+//
+//						String[] SOAPRequest = SOAPRequestXML.split("><");
+//			Log.w("GAME", "..........SOAPRequestXML= " + SOAPRequestXML);
+//			for (int i = 0; i < SOAPRequest.length; i++) {
+//				Log.w(TAG, SOAPRequest[i]);
+//			}
+//
+//			DefaultHttpClient httpclient = new DefaultHttpClient();
+//			HttpParams httpParameters = new BasicHttpParams();
+//			// Set the timeout in milliseconds until a connection is
+//			// established.
+//			// The default value is zero, that means the timeout is not used.
+//
+//			HttpConnectionParams.setConnectionTimeout(httpParameters, timeout);
+//			httpclient.setParams(httpParameters);
+//
+//			// http://172.40.10.243:8081/StoreTools/StoreTools.asmx
+//
+//			if (urlstr.contains("212.170.159.237")) {
+//				httpclient.getCredentialsProvider().setCredentials(
+//						new AuthScope("212.170.159.237", 8081),
+//						new UsernamePasswordCredentials(user, pass));
+//			} else {
+//				httpclient.getCredentialsProvider().setCredentials(
+//						new AuthScope("172.40.10.243", 8081),
+//						new UsernamePasswordCredentials(user, pass));
+//			}
+//
+//			// Log.w("WS","user = "+user+" pass = "+pass);
+//			HttpPost httppost = new HttpPost(urlstr);
+//
+//			StringEntity se = new StringEntity(SOAPRequestXML, HTTP.UTF_8);
+//
+//			se.setContentType("text/xml");
+//			httppost.setHeader("Content-Type", "text/xml;charset=UTF-8");
+//			httppost.setEntity(se);
+//
+//			// Execute HTTP Post Request
+//			HttpResponse response = httpclient.execute(httppost);
+//
+//			BufferedReader reader = new BufferedReader(new InputStreamReader(
+//					response.getEntity().getContent(), "UTF-8"));
+//
+//			StringBuffer responseString = new StringBuffer("");
+//			String line;
+//
+//			while ((line = reader.readLine()) != null) {
+//				responseString.append(line);
+//				responseString.append("\n");
+//			}
+//
+//			StringBuffer responseString2 = new StringBuffer("");
+//			String[] xmlstr = responseString.toString().split("><");
+//			Log.v(TAG, "XML  ----------------  inicio XML");
+//			for (int i = 0; i < xmlstr.length; i++) {
+//				Log.v(TAG, xmlstr[i]);
+//			}
+//			Log.v(TAG, "XML  ----------------  fin XML");
+//
+//			Log.v(TAG, "XML  ----------------  inicio XML");
+//			Log.v(TAG, responseString.toString());
+//			Log.v(TAG, "XML  ----------------  fin XML");
+//
+//			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+//			DocumentBuilder db = dbf.newDocumentBuilder();
+//
+//			InputSource is = new InputSource();
+//			is.setCharacterStream(new StringReader(responseString.toString()));
+//			Document doc = db.parse(is);
+//			doc.getDocumentElement().normalize();
+//
+//			nodeList = doc.getElementsByTagName(itemProduct);
+//
+//			Log.i("GAME-", "...numero elementos - " + nodeList.getLength());
+//			// Log.i
+//			// ("GAME-","...numero elementos child - "+nodeList.item(0).getChildNodes().getLength());
+//
+//			// Lectura de Status
+//			nodeListStatus = doc.getElementsByTagName(itemStatus);
+//			Log.i("GAME-",
+//					"...numero elementos - " + nodeListStatus.getLength());
+//
+//			Status status = null;
+//
+//			for (int i = 0; i < nodeListStatus.getLength(); i++) {
+//
+//				Node node = nodeListStatus.item(i);
+//
+//				NodeList nodelistStatus = node.getChildNodes();
+//
+//				for (int j = 0; j < nodelistStatus.getLength(); j++) {
+//					Log.i("GAME", "id " + i + ": " + j + " - "
+//							+ nodelistStatus.item(j).getTextContent());
+//				}
+//
+//				status = new Status();
+//
+//				status.setStatusCode(nodelistStatus.item(0).getTextContent());
+//				status.setStatusMessage(nodelistStatus.item(1).getTextContent());
+//
+//				// String StatusCode =
+//				// nodelistStatus.item(i).getChildNodes().item(0).getTextContent();
+//				// String StatusMessage =
+//				// nodelistStatus.item(i).getChildNodes().item(1).getTextContent();
+//				//
+//				// status = new Status(StatusCode,StatusMessage);
+//
+//				Log.i("WS", "Status Recibido = " + status.getStatusMessage());
+//
+//			}
+//
+//			for (int i = 0; i < nodeList.getLength(); i++) {
+//
+//				Node node = nodeList.item(i);
+//
+//				NodeList nodelist = node.getChildNodes();
+//
+//				for (int j = 0; j < nodeList.item(0).getChildNodes()
+//						.getLength(); j++) {
+//					Log.i("GAME",
+//							"id " + i + ": " + j + " - "
+//									+ nodelist.item(j).getTextContent());
+//				}
+//
+//				Family family = new Family("", "");
+//				Genre genre = new Genre("", "", "");
+//				Pegi pegi = new Pegi("", "");
+//				Points points = new Points("", "");
+//				Annotation Annotation = new Annotation("", "", "", "", "", "", "",
+//						"", "", "", "", "", "", family, genre, pegi, points,
+//						"", "", "");
+//
+//				Annotation.setSKU(nodeList.item(i).getChildNodes().item(0)
+//						.getTextContent());
+//				Annotation.setEAN(nodeList.item(i).getChildNodes().item(1)
+//						.getTextContent());
+//				Annotation.setName(nodeList.item(i).getChildNodes().item(2)
+//						.getTextContent());
+//				Annotation.setDescription(nodeList.item(i).getChildNodes()
+//						.item(3).getTextContent());
+//
+//				Annotation.setOfficialPrice(nodeList.item(i).getChildNodes()
+//						.item(4).getTextContent());
+//				Annotation.setPriceStoreNew(nodeList.item(i).getChildNodes()
+//						.item(5).getTextContent());
+//				Annotation.setPriceStorePre(nodeList.item(i).getChildNodes()
+//						.item(6).getTextContent());
+//				Annotation.setPriceRefNew(nodeList.item(i).getChildNodes()
+//						.item(7).getTextContent());
+//				Annotation.setPriceRefPre(nodeList.item(i).getChildNodes()
+//						.item(8).getTextContent());
+//
+//				Annotation.setStockNew(nodeList.item(i).getChildNodes().item(9)
+//						.getTextContent());
+//				Annotation.setStockPre(nodeList.item(i).getChildNodes().item(10)
+//						.getTextContent());
+//				Annotation.setStockPreTotal(nodeList.item(i).getChildNodes()
+//						.item(11).getTextContent());
+//
+//				Annotation.setPublisher(nodeList.item(i).getChildNodes().item(12)
+//						.getTextContent());
+//
+//				// Family
+////				family.setFamilyCode(nodeList.item(i).getChildNodes().item(13)
+////						.getChildNodes().item(0).getTextContent());
+////				family.setFamilyDescription(nodeList.item(i).getChildNodes()
+////						.item(13).getChildNodes().item(1).getTextContent());
+////				Annotation.setFamily(family);
+//
+////				Log.i("WS", "Family = " + Annotation.getFamily().getFamilyCode()
+////						+ " " + Annotation.getFamily().getFamilyDescription());
+//
+//				// Genre
+////				genre.setGenreCode(nodeList.item(i).getChildNodes().item(14)
+////						.getChildNodes().item(0).getTextContent());
+////				genre.setGenreType(nodeList.item(i).getChildNodes().item(14)
+////						.getChildNodes().item(1).getTextContent());
+////				genre.setGenreDescription(nodeList.item(i).getChildNodes()
+////						.item(14).getChildNodes().item(2).getTextContent());
+////				Annotation.setGenre(genre);
+//
+////				Log.i("WS", "Genre = " + Annotation.getGenre().getGenreCode()
+////						+ " " + Annotation.getGenre().getGenreDescription() + " "
+////						+ Annotation.getGenre().getGenreType());
+//
+//				// Pegi
+////				pegi.setPegiCode(nodeList.item(i).getChildNodes().item(15)
+////						.getChildNodes().item(0).getTextContent());
+////				pegi.setPegiAge(nodeList.item(i).getChildNodes().item(15)
+////						.getChildNodes().item(1).getTextContent());
+////				Annotation.setPegi(pegi);
+////
+////				Log.i("WS", "Pegi = " + Annotation.getPegi().getPegiCode() + " "
+////						+ Annotation.getPegi().getPegiAge());
+//
+//				// Points
+////				points.setPointsNew(nodeList.item(i).getChildNodes().item(16)
+////						.getChildNodes().item(0).getTextContent());
+////				points.setPointsPre(nodeList.item(i).getChildNodes().item(16)
+////						.getChildNodes().item(1).getTextContent());
+////				Annotation.setPoints(points);
+////
+////				Log.i("WS", "Points = " + Annotation.getPoints().getPointsNew()
+////						+ " " + Annotation.getPoints().getPointsPre());
+//
+//				Annotation.setWeight(nodeList.item(i).getChildNodes().item(17)
+//						.getTextContent());
+//				Annotation.setReleaseDate(nodeList.item(i).getChildNodes()
+//						.item(18).getTextContent());
+//				Annotation.setInsertDate(nodeList.item(i).getChildNodes()
+//						.item(19).getTextContent());
+//
+//				// AnnotationAntiguo product = new AnnotationAntiguo();
+//				//
+//				// product.setSkuNew(nodeList.item(i).getChildNodes().item(0).getTextContent());
+//				// product.setSkuPre(nodeList.item(i).getChildNodes().item(1).getTextContent());
+//				// product.setSkuDlc(nodeList.item(i).getChildNodes().item(2).getTextContent());
+//				// product.setName(nodeList.item(i).getChildNodes().item(2).getTextContent());
+//				// product.setOfficialPrice(nodeList.item(i).getChildNodes().item(4).getTextContent());
+//				// product.setPriceStoreNew(nodeList.item(i).getChildNodes().item(5).getTextContent());
+//				// product.setPriceStorePre(nodeList.item(i).getChildNodes().item(6).getTextContent());
+//				// product.setPriceRefNew(nodeList.item(i).getChildNodes().item(7).getTextContent());
+//				// product.setPriceRefPre(nodeList.item(i).getChildNodes().item(8).getTextContent());
+//				//
+//				// product.setStockNew(nodeList.item(i).getChildNodes().item(9).getTextContent());
+//				// product.setStockPre(nodeList.item(i).getChildNodes().item(10).getTextContent());
+//				// product.setstockPreTotal(nodeList.item(i).getChildNodes().item(11).getTextContent());
+//				// //
+//				// product.setFamily(nodeList.item(i).getChildNodes().item(12).getTextContent());
+//				// product.setFamily(nodeList.item(i).getChildNodes().item(13).getTextContent());
+//				// product.setPointsNew(nodeList.item(i).getChildNodes().item(14).getTextContent());
+//				// product.setPointsPre(nodeList.item(i).getChildNodes().item(15).getTextContent());
+//				// product.setPointsDlc(nodeList.item(i).getChildNodes().item(16).getTextContent());
+//				// product.setStatusNew(nodeList.item(i).getChildNodes().item(17).getTextContent());
+//				// product.setStatusPre(nodeList.item(i).getChildNodes().item(18).getTextContent());
+//				// product.setStatusDlc(nodeList.item(i).getChildNodes().item(19).getTextContent());
+//
+//				Log.e("WS", "Annotation Añadido = " + Annotation.getName());
+//
+//				items.add(Annotation);
+//
+//			}
+//
+//			Log.w("GAME", " " + "Numero Elementos - :" + items.size());
+//			Log.w("GAME", " " + "Numero Elementos-1 - :" + ((items.size() - 1)));
+//
+//			for (int j = 0; j < items.size(); j++) {
+//
+//				Log.w("GAME", " " + "setAdapter try onPostExecute j:" + j
+//						+ " - " + items.get(j).getName());
+//
+//			}
+//
+//			Log.w("GAME", "fin bien");
+//
+//			return items;
+//
+//			// } catch (UnknownHostException e) {
+//			// Log.v(TAG,
+//			// "UnknownHostException --------------------------------" +
+//			// e.getMessage());
+//			// return null;
+//			// }catch (SocketTimeoutException e) {
+//			// Log.v(TAG, "TIME OUT EXCEPTION --------------------------------"
+//			// + e.getMessage());
+//			// return null;
+//			// }catch (IOException e) {
+//			// Log.v(TAG, "IOException --------------------------------" +
+//			// e.getMessage());
+//			// return null;
+//			// }catch (ConnectTimeoutException e) {
+//			// Log.v(TAG, "TIME OUT EXCEPTION --------------------------------"
+//			// + e.getMessage());
+//			// return null;
+//		} catch (Exception e) {
+//
+//			Log.e("GAME",
+//					"callWebService" + " - XML Pasing Excpetion = "
+//							+ e.getMessage());
+//
+//			return null;
+//		}
+//
+//	}
+
+	
+	
+//	http://orion.esp.uem.es:8080/CLEiM/XMLServ?text=c%C3%A1ncer%20de%20pr%C3%B3stata%20prostate%20cancer
+//	http://62.212.77.173:8080/CLEiM/XMLServ?text=c%C3%A1ncer%20de%20pr%C3%B3stata%20prostate%20cancer
+
+		public static ArrayList<Annotation_CLEiM> WS_getProductsFromRequest(String urlstr) {
+	
+			ArrayList<Annotation_CLEiM> items = new ArrayList<Annotation_CLEiM>();
+			
+
+			
+			Log.w(TAG, "webservice");
+			
+
+			try {
+				
+				String uri = urlstr;
+
+				URL url = new URL(uri);
+				HttpURLConnection connection =
+				    (HttpURLConnection) url.openConnection();
+				connection.setRequestMethod("GET");
+				connection.setRequestProperty("Accept", "application/xml");
+
+				InputStream xml = connection.getInputStream();
+
+				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+				DocumentBuilder db = dbf.newDocumentBuilder();
+				Document doc = db.parse(xml);
+			
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			
+			
+			return items;
+			
+	}
+		
+		
+		
+		
+		public static ArrayList<Annotation_CLEiM> WS_getProductsFromRequest2(String urlstr) {
+			
+			ArrayList<Annotation_CLEiM> items = new ArrayList<Annotation_CLEiM>();
+			
+
+			
+			Log.w(TAG, "webservice");
+			
+			try {
+
+				                //HttpResponse response = client.execute(post);
+				                //HttpEntity r_entity = response.getEntity();
+				                //String xmlString = EntityUtils.toString(r_entity);
+				
+				        HttpClient client = new DefaultHttpClient();  
+//				        String URL = "http://api.flurry.com/eventMetrics/Event?apiAccessCode=YHJBA13CSKTMS6XHTM6M&apiKey=6XQY729FDU1CR9FKXVZP&startDate=2011-2-28&endDate=2011-3-1&eventName=Tip%20Calculated";
+				        String URL = "http://62.212.77.173:8080/CLEiM/XMLServ?text=";
+				        HttpGet get = new HttpGet(URL);
+				        get.addHeader("Accept", "application/xml");
+				        get.addHeader("Content-Type", "application/xml");
+				        HttpResponse responsePost;
+					
+							responsePost = client.execute(get);
+						
+				        HttpEntity resEntity = responsePost.getEntity(); 
+				        if (resEntity != null) 
+				
+				        {  
+				                    System.out.println("Not null!");
+				
+				                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+				
+				                    DocumentBuilder db = dbf.newDocumentBuilder();
+				
+				                    String responseXml = EntityUtils.toString(responsePost.getEntity());
+				                    Document doc = db.parse(responseXml);
+				                    doc.getDocumentElement().normalize();
+				
+				                    NodeList nodeList = doc.getElementsByTagName("cleim");
+				                    
+				                    for (int j = 0; j < nodeList.getLength(); j++) {
+				    					Log.i("GAME", "id"+ j + " - " + nodeList.item(j).getTextContent());
+				    				}
+				                    	
+				                    	
+				                    for (int i = 0; i < nodeList.getLength(); i++)
+				                    {
+				                        Node node = nodeList.item(i);   
+				
+				                        Element fstElmnt = (Element) node;
+				
+				                        NodeList nameList = fstElmnt.getElementsByTagName("annotation");
+				
+				                        Element dayElement = (Element) nameList.item(0);
+				
+				                        nameList = dayElement.getChildNodes();
+				
+				                        String countString = dayElement.getAttribute("concept");
+				                        System.out.println(countString);
+				                        int count = Integer.parseInt(countString);
+				                        System.out.println(count);
+				                        count += count;
+				
+				                    }
+				        }
+				
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				//responsePost = client.execute(get);
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				//responsePost = client.execute(get);
+				e.printStackTrace();
+			} catch (ParserConfigurationException e) {
+				// TODO Auto-generated catch block
+				//  DocumentBuilder db = dbf.newDocumentBuilder();
+				e.printStackTrace();
+			} catch (SAXException e) {
+				// TODO Auto-generated catch block
+				//Document doc = db.parse(responseXml);
+				e.printStackTrace();
+			}  
+			
+			return items;
+			
+	}
+		
+		
+		
+		
+		
+//		<cleim>
+	//		<input>
+		//		<text>cÃ¡ncer de prÃ³stata prostate cancer</text>
+		//		<remoteonts>40397,46116</remoteonts>
+		//		<lev>0</lev>
+		//		<localSrc>[Freebase, MedlinePlus, SnomedCore, Snomed]</localSrc>
+		//		<localLan>[en, sp]</localLan>
+	//		</input>
+	//		<annotation language="en" source="Freebase">
+		//		<concept neg="0">PROSTATE CANCER</concept>
+		//		<from>21</from>
+		//		<to>36</to>
+		//		<preferred direct="true">PROSTATE CANCER</preferred>
+		//		<localurl>disease.jsp?term=PROSTATE CANCER</localurl>
+		//		<urlen>http://www.freebase.com/view/en/prostate_cancer</urlen>
+		//		<urlsp/>
+		//		<groups>Disease</groups>
+	//		</annotation>
+	//		<annotation language="en" source="Freebase">
+		//		<concept neg="0">CANCER</concept>
+		//		<from>30</from>
+		//		<to>36</to>
+		//		<preferred direct="true">CANCER</preferred>
+		//		<localurl>disease.jsp?term=CANCER</localurl>
+		//		<urlen>http://www.freebase.com/view/en/cancer</urlen>
+		//		<urlsp/>
+		//		<groups>Disease</groups>
+	//		</annotation>
+	//		<annotation language="en" source="MedlinePlus">
+		//		<concept neg="0">PROSTATE CANCER</concept>
+		//		<from>21</from>
+		//		<to>36</to>
+		//		<preferred direct="true">PROSTATE CANCER</preferred>
+		//		<localurl>medlineplus.jsp?term=PROSTATE CANCER</localurl>
+		//		<urlen>
+		//		http://www.nlm.nih.gov/medlineplus/prostatecancer.html
+		//		</urlen>
+		//		<urlsp>
+		//		http://www.nlm.nih.gov/medlineplus/spanish/prostatecancer.html
+		//		</urlsp>
+		//		<groups>Cancers | Seniors | Men | Male Reproductive System</groups>
+	//		</annotation>
+	//		<annotation language="en" source="MedlinePlus">
+		//		<concept neg="0">CANCER</concept>
+		//		<from>30</from>
+		//		<to>36</to>
+		//		<preferred direct="true">CANCER</preferred>
+		//		<localurl>medlineplus.jsp?term=CANCER</localurl>
+		//		<urlen>http://www.nlm.nih.gov/medlineplus/cancer.html</urlen>
+		//		<urlsp>
+		//		http://www.nlm.nih.gov/medlineplus/spanish/cancer.html
+		//		</urlsp>
+		//		<groups>Cancers</groups>
+	//		</annotation>
+	//		<annotation language="en" source="OBA Medlineplus (40397)">
+		//		<concept neg="0">A PROSTATE CANC</concept>
+		//		<from>19</from>
+		//		<to>34</to>
+		//		<preferred direct="true">PROSTATE CANCER</preferred>
+		//		<localurl>medlineplus.jsp?term=PROSTATE CANCER</localurl>
+		//		<urlen>
+		//		http://purl.bioontology.org/ontology/MEDLINEPLUS/T112
+		//		</urlen>
+		//		<urlsp/>
+		//		<groups>NCBO BioPortal concept</groups>
+	//		</annotation>
+		//		<annotation language="en" source="OBA Medlineplus (40397)">
+		//		<concept neg="0">E CANC</concept>
+		//		<from>28</from>
+		//		<to>34</to>
+		//		<preferred direct="true">CANCER</preferred>
+		//		<localurl>medlineplus.jsp?term=CANCER</localurl>
+		//		<urlen>
+		//		http://purl.bioontology.org/ontology/MEDLINEPLUS/T25
+		//		</urlen>
+		//		<urlsp/>
+		//		<groups>NCBO BioPortal concept</groups>
+	//		</annotation>
+//		</cleim>
+//		
+	
+		
+		
+		
+		
+	public static ArrayList<Annotation_CLEiM> WS_getCLEiM_Search_Concept(String concepto) {
+//	public static String WS_getCLEiM_Search_Concept(String concepto) {
+			
+			ArrayList<Annotation_CLEiM> items = new ArrayList<Annotation_CLEiM>();
+			
+			String resultado = "";
+			
+			Log.w(TAG, "webservice");
+			
+
+			try {
+
+				                //HttpResponse response = client.execute(post);
+				                //HttpEntity r_entity = response.getEntity();
+				                //String xmlString = EntityUtils.toString(r_entity);
+				
+				        HttpClient client = new DefaultHttpClient();  
+//				        String URL = "http://api.flurry.com/eventMetrics/Event?apiAccessCode=YHJBA13CSKTMS6XHTM6M&apiKey=6XQY729FDU1CR9FKXVZP&startDate=2011-2-28&endDate=2011-3-1&eventName=Tip%20Calculated";
+//				        http://62.212.77.173:8080/CLEiM/XMLServ?text=c%C3%A1ncer%20de%20pr%C3%B3stata%20prostate%20cancer				        
+				        
+//				        String URL = "http://orion.esp.uem.es:8080/CLEiM/XMLServ?text=c%C3%A1ncer%20de%20pr%C3%B3stata%20prostate%20cancer"
+				        StringBuilder url = new StringBuilder();
+				        url.append("http://62.212.77.173:8080/CLEiM/XMLServ?text=");
+				        url.append(concepto);
+				        
+//				        String URL_definitiva = URLEncoder.encode(url.toString(), "UTF-8");
+				        Log.e(TAG, url.toString());
+				        
+				        
+				        HttpGet get = new HttpGet(url.toString());
+//				        get.addHeader("Accept", "application/xml");
+//				        get.addHeader("Content-Type", "application/xml");
+				        
+				        
+				        get.setHeader("Content-Type", "text/xml;charset=UTF-8");
+				        
+				        
+						
+				        HttpResponse responsePost = client.execute(get);  
+				        HttpEntity resEntity = responsePost.getEntity(); 
+				        if (resEntity != null) 
+				
+				        {  
+				                    System.out.println("Not null!");
+				
+				                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+				
+				                    DocumentBuilder db = dbf.newDocumentBuilder();
+				
+				                    String responseXml = EntityUtils.toString(responsePost.getEntity());
+				                    
+				                    
+				                    Log.w(TAG, responseXml.toString());
+				                    
+				                    resultado = responseXml.toString();
+				                    
+//				                    resultado = (String) resultado.subSequence(resultado.indexOf(">")+1, resultado.length());
+				                    resultado = resultado.replace("standalone=\"no\"", "");
+				                    Log.i(TAG, resultado.toString().trim());
+				                    
+				                    
+				                    		
+//				                    Document doc = db.parse(responseXml);
+				                    Document doc = db.parse(new InputSource(new ByteArrayInputStream(resultado.getBytes("utf-8"))));
+				                    doc.getDocumentElement().normalize();
+				                    
+				                    
+				                    
+				
+				                    NodeList nodeList = doc.getElementsByTagName("annotation");
+				                    
+				                    Log.w(TAG, nodeList.toString());
+				                    resultado = nodeList.toString();
+				                    
+				                    for (int i = 0; i < nodeList.getLength(); i++) {
+//				    					Log.i("GAME", "id"+ i + " - " + nodeList.item(i).getTextContent());
+				    					
+				                    	
+				                    	Annotation_CLEiM annotation = new Annotation_CLEiM();
+				                    	
+				    					Node node = nodeList.item(i);
+				    					Element fstElmnt = (Element) node;
+				    					
+				    					
+//				    					NodeList source = fstElmnt.getElementsByTagName("source");
+//				    					Log.i("GAME", "CONCEPT id"+ i + " - " + source.item(0).getTextContent());
+//				    					annotation.setSource(source.item(0).getTextContent());
+				    					
+				    					
+				    					
+				    					NodeList concept = fstElmnt.getElementsByTagName("concept");
+				    					Log.i("GAME", "CONCEPT id"+ i + " - " + concept.item(0).getTextContent());
+				    					annotation.setConcept(concept.item(0).getTextContent());
+				    					annotation.setSource(fstElmnt.getAttribute("source"));
+				    					
+				    					
+				    					
+				    					
+				    					NodeList from = fstElmnt.getElementsByTagName("from");
+				    					Log.i("GAME", "from id"+ i + " - " + from.item(0).getTextContent());
+				    					annotation.setFrom(from.item(0).getTextContent());
+				    					
+				    					NodeList to = fstElmnt.getElementsByTagName("to");
+				    					Log.i("GAME", "to id"+ i + " - " + to.item(0).getTextContent());
+				    					annotation.setTo(to.item(0).getTextContent());
+				    					
+				    					NodeList preferred = fstElmnt.getElementsByTagName("preferred");
+				    					Log.i("GAME", "preferred id"+ i + " - " + preferred.item(0).getTextContent());
+				    					annotation.setPreferred(preferred.item(0).getTextContent());
+				    					
+				    					NodeList localurl = fstElmnt.getElementsByTagName("localurl");
+				    					Log.i("GAME", "localurl id"+ i + " - " + localurl.item(0).getTextContent());
+				    					annotation.setLocalurl(localurl.item(0).getTextContent());
+				    					
+				    					NodeList urlen = fstElmnt.getElementsByTagName("urlen");
+				    					Log.i("GAME", "urlen id"+ i + " - " + urlen.item(0).getTextContent());
+				    					annotation.setUrlen(urlen.item(0).getTextContent());
+				    					
+				    					NodeList urlsp = fstElmnt.getElementsByTagName("urlsp");
+				    					Log.i("GAME", "urlsp id"+ i + " - " + urlsp.item(0).getTextContent());
+				    					annotation.setUrlsp(urlsp.item(0).getTextContent());
+				    					
+				    					NodeList groups = fstElmnt.getElementsByTagName("groups");
+				    					Log.i("GAME", "groups id"+ i + " - " + groups.item(0).getTextContent());
+				    					annotation.setGroups(groups.item(0).getTextContent());
+				    					
+				    					
+				    					items.add(annotation);
+				    					
+				    				}
+				                    	
+				                    	
+//				                    for (int i = 0; i < nodeList.getLength(); i++)
+//				                    {
+//				                        Node node = nodeList.item(i);   
+//				
+//				                        Element fstElmnt = (Element) node;
+//				
+//				                        NodeList nameList = fstElmnt.getElementsByTagName("annotation");
+//				
+//				                        Element dayElement = (Element) nameList.item(0);
+//				
+//				                        nameList = dayElement.getChildNodes();
+//				                        
+//				                        for (int j = 0; j < nameList.getLength(); j++) {
+//					    					Log.i("GAME", "id"+ i + "-"+j + " - " + nameList.item(j).getTextContent());
+//					    				}
+//				                        
+//				
+////				                        String countString = dayElement.getAttribute("concept");
+////				                        System.out.println(countString);
+////				                        int count = Integer.parseInt(countString);
+////				                        System.out.println(count);
+////				                        count += count;
+//				
+//				                    }
+				                    
+//				                    11-30 13:02:57.352: W/WebServices(3281): <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+				        }
+				        
+				        
+				        return items;
+//	        			return resultado;
+	        			
+	        			
+				
+				    } catch (Exception e) {
+				
+				                    Log.e(TAG,"XML Passing Exception = " + e.getMessage());
+				                    return null;
+				    }
+			
+			
+
+			
+	}
+		
+	
+	
+	
+	
+
+}

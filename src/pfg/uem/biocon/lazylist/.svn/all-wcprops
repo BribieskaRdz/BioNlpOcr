@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/test_repo/!svn/ver/8/uem.pfg.ocr_bce.android/src/com/fedorvlasov/lazylist
+END
+ImageLoader.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/test_repo/!svn/ver/8/uem.pfg.ocr_bce.android/src/com/fedorvlasov/lazylist/ImageLoader.java
+END
+ImageAdapterListView_juegos_grid.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/test_repo/!svn/ver/8/uem.pfg.ocr_bce.android/src/com/fedorvlasov/lazylist/ImageAdapterListView_juegos_grid.java
+END
+LazyAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/test_repo/!svn/ver/8/uem.pfg.ocr_bce.android/src/com/fedorvlasov/lazylist/LazyAdapter.java
+END
+MainActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/test_repo/!svn/ver/8/uem.pfg.ocr_bce.android/src/com/fedorvlasov/lazylist/MainActivity.java
+END
+FileCache.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/test_repo/!svn/ver/8/uem.pfg.ocr_bce.android/src/com/fedorvlasov/lazylist/FileCache.java
+END
+MemoryCache.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/test_repo/!svn/ver/8/uem.pfg.ocr_bce.android/src/com/fedorvlasov/lazylist/MemoryCache.java
+END
+Utils.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/test_repo/!svn/ver/8/uem.pfg.ocr_bce.android/src/com/fedorvlasov/lazylist/Utils.java
+END

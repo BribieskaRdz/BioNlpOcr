@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+	<!-- BIOCON -->
+    <color name="azul_biocon">#089cf3</color>
+    <color name="granate_biocon">#a02513</color>
+    <color name="gris_biocon">#c9c9c9</color>
+    <color name="Blanco">#FFFFFF</color>
+    <color name="Negro">#000000</color>
+    
+    
+    
+    
+    <color name="azul_claro">#86006a</color>
+    <color name="azul_start">#a70084</color>
+    <color name="azul_end">#86006a</color>
+
+    
+    <color name="exazul_claro">#E0EAFF</color>
+    <color name="exazul_start">#8B1A1A</color>
+    <color name="exazul_end">#CD2626</color>
+    
+    
+     
+     <!-- COLORES PALETA REMEDY-->
+     <color name="Remedy_GrisAzulado">#373E49</color>
+	 <color name="Remedy_GrisVerde">#72857F</color>
+	 <color name="Remedy_GrisAzuladoOscuro">#2E2F32</color>
+	 <color name="Remedy_GrisVerdeAzul">#34555C</color>
+	 <color name="Remedy_GrisAmarillento">#5D5B54</color>
+	 <color name="Remedy_GrisAnaranjado">#46413A</color>
+     <color name="Remedy_GrisAnaranjadoClaro">#C8C5BF</color>
+	 <color name="Remedy_NaranjaRojizo">#DD5C43</color>
+	 
+
+	 	 	 
+    
+    
+    <drawable name="red">#7f00</drawable>
+    <drawable name="blue">#770000ff</drawable>
+    <drawable name="green">#7700ff00</drawable>
+	<drawable name="yellow">#77ffff00</drawable>
+	
+	<drawable name="screen_background_black">#ff000000</drawable>
+    <drawable name="translucent_background">#e0000000</drawable>
+    <drawable name="transparent_background">#00000000</drawable>
+
+    <color name="solid_red">#f00</color>
+    <color name="solid_blue">#0000ff</color>
+    <color name="solid_green">#f0f0</color>
+    <color name="solid_yellow">#ffffff00</color>
+    
+    
+    <color name="actionbar_separator">#8B1A1A</color>
+    <color name="actionbar_title">#FFFFFF</color>
+    <color name="actionbar_background_start">#5D5B54</color>
+    <color name="actionbar_background_end">#46413A</color>
+    <color name="actionbar_background_item_pressed_start">#FF7F00</color>
+    <color name="actionbar_background_item_pressed_end">#EE7600</color>
+    
+    
+
+	 
+	 
+     <color name="ColorTextoGrisMedio">#999999</color>
+     <color name="ColorTextoGrisFuerte">#626262</color>
+     <color name="ColorTextoRosa">#a70084</color>
+     <color name="ColorRosaOscuro">#86006a</color>
+     <color name="ColorGrisClaro1">#f5f5f5</color>
+     <color name="ColorGrisClaro2">#e4e4e4</color>
+     <color name="ColorGrisClaro3">#999999</color>
+     
+     
+    <color name="actionbar_background_start_red">#8B1A1A</color>
+    <color name="actionbar_background_end_red">#CD2626</color>
+    <color name="actionbar_background_item_pressed_start_red">#FF7F00</color>
+    <color name="actionbar_background_item_pressed_end_red">#EE7600</color>
+    <color name="actionbar_background_start_blue">#cacaca</color>
+    <color name="actionbar_background_end_blue">#286583</color>
+    <color name="actionbar_background_item_pressed_start_blue">#FF7F00</color>
+    <color name="actionbar_background_item_pressed_end_blue">#EE7600</color>
+    <color name="actionbar_background_start_white">#f2f2f2</color>
+    <color name="actionbar_background_end_white">#f1f1f1</color>
+    <color name="actionbar_background_item_pressed_start_white">#FF7F00</color>
+    <color name="actionbar_background_item_pressed_end_white">#EE7600</color>
+ 
+    <color name="red_tint">#88FF0000</color>
+    <color name="blue_tint">#880000FF</color>
+    <color name="yellow_tint">#88FFFF00</color>
+    <color name="purple_tint">#88995f86</color>
+    <color name="orange_tint">#aaffbf00</color>
+    <color name="magenta_tint">#88ff33cc</color>
+    <color name="transparent">#0000</color>
+    
+    
+    <color name="menu_rosa">#a70084</color>
+    <color name="menu_gris_ppal">#626262</color>
+    <color name="menu_gris_categoria">#999999</color>
+    <color name="menu_gris_subcategoria">#f5f5f5</color>
+    
+    
+    
+     <color name="status_view">#50000000</color>
+  <color name="status_text">#ffffffff</color>
+  
+  <color name="ocr_res_transparent">#808080ff</color>
+  <color name="ocr_res_text_color">#ffffffff</color>
+  <color name="capturelayout_frame">#ff000000</color>
+  <color name="capturelayout_mask">#60000000</color>
+  
+  
+    <color name="naranja_stilo">#e9a263</color>
+    <color name="naranja_sub_stilo">#ffbe85</color>
+    <color name="naranja_sub_substilo">#f7dec9</color>
+  
+    
+  
+    
+    
+    
+    
+	<color name="stilo_naranja_principal">#B26120</color>
+	
+    <color name="stilo_naranja_principal1">#B1540D</color>
+    <color name="stilo_naranja_principal2">#B26B31</color>
+    <color name="stilo_naranja_principal3">#B06D30</color>
+    <color name="stilo_naranja_principal4">#AC4E0A</color>
+    <color name="stilo_naranja_principal5">#9E8773</color>
+    <color name="stilo_naranja_principal6">#A0866E</color>
+    
+    <color name="stilo_naranja_sub1_1">#886c59</color>
+	<color name="stilo_naranja_sub1_2">#8f836D</color>    
+    <color name="stilo_naranja_sub1_3">#A98362</color>
+	<color name="stilo_naranja_sub1_4">#99846D</color>    
+    
+    <color name="stilo_azul_asub1_1">#ABB6B8</color>
+	<color name="stilo_azul_asub1_2">#81AEBC</color>    
+    <color name="stilo_azul_asub1_3">#738087</color>
+	<color name="stilo_azul_asub1_4">#7B838D</color>  
+    <color name="stilo_azul_asub1_5">#B6A9BF</color>
+	<color name="stilo_azul_asub1_6">#76989A</color>    
+    <color name="stilo_azul_asub1_7">#9EA79B</color>
+	<color name="stilo_azul_asub1_8">#BBC6BC</color>  
+	<color name="stilo_azul_asub1_9">#41597d</color>
+	<color name="stilo_azul_asub1_10">#6d4f7a</color>  
+	
+	<color name="stilo_amarillo_asub1_1">#f6c21d</color>
+	<color name="stilo_amarillo_asub1_2">#f3d124</color>    
+    <color name="stilo_amarillo_asub1_3">#e4cb1b</color>
+	<color name="stilo_amarillo_asub1_4">#e8d01c</color>  
+    <color name="stilo_amarillo_asub1_5">#edd319</color>
+	<color name="stilo_amarillo_asub1_6">#e3c517</color>    
+
+	
+	<color name="stilo_verde_vsub1_1">#71864C</color>
+	<color name="stilo_verde_vsub1_2">#8FAF59</color>
+	<color name="stilo_verde_vsub1_3">#D9D8CB</color>
+	<color name="stilo_verde_vsub1_4">#EAE1D7</color>
+	<color name="stilo_verde_vsub1_5">#72a339</color>
+	<color name="stilo_verde_vsub1_6">#7cb234</color>
+	<color name="stilo_verde_vsub1_7">#a2c18c</color>
+	<color name="stilo_verde_vsub1_8">#6e9741</color>
+	<color name="stilo_verde_vsub1_9">#678f32</color>
+	
+	    
+    <color name="stilo_rosa_rsub1_1">#E2C4B7</color>
+	<color name="stilo_rosa_rsub1_2">#b79a8b</color>    
+    <color name="stilo_rosa_rsub1_3">#c0856c</color>
+	<color name="stilo_rosa_rsub1_4">#cfbead</color>
+	<color name="stilo_rosa_rsub1_5">#c8aeb4</color>
+
+	
+	<color name="stilo_blancosrotos_rsub1_1">#e9e3e0</color>
+	<color name="stilo_blancosrotos_rsub1_2">#dcd9ce</color>    
+    <color name="stilo_blancosrotos_rsub1_3">#d8d3c7</color>
+	<color name="stilo_blancosrotos_rsub1_4">#d0cac1</color>
+	<color name="stilo_blancosrotos_rsub1_5">#dcd6ca</color>
+	<color name="stilo_blancosrotos_rsub1_6">#ddd3c9</color>
+	
+	
+	<color name="stilo_webandroid_amarillo_1">#ff8a00</color>
+	<color name="stilo_webandroid_amarillo_2">#ff8800</color>
+	<color name="stilo_webandroid_amarillo_3">#ff9105</color>
+	<color name="stilo_webandroid_amarillo_4">#ff9909</color>
+	<color name="stilo_webandroid_amarillo_5">#ffa00e</color>
+	<color name="stilo_webandroid_amarillo_6">#ffa713</color>
+	<color name="stilo_webandroid_amarillo_7">#ffae18</color>
+	<color name="stilo_webandroid_amarillo_8">#ffb61c</color>
+	<color name="stilo_webandroid_amarillo_9">#ffbd21</color>
+	<color name="stilo_webandroid_amarillo_10">#ffd060</color>
+	<color name="stilo_webandroid_amarillo_11">#ffd980</color>
+	<color name="stilo_webandroid_amarillo_12">#ffecc0</color>
+	<color name="stilo_webandroid_amarillo_13">#fff6df</color>
+    
+	
+	
+	
+	<!--
+ Copyright (C) 2008 ZXing authors
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ -->
+  <color name="contents_text">#ff000000</color>
+  <color name="encode_view">#ffffffff</color>
+  <color name="possible_result_points">#c0ffbd21</color> <!-- Android standard ICS color -->
+  <color name="result_minor_text">#ffc0c0c0</color>
+  <color name="result_points">#c099cc00</color> <!-- Android standard ICS color -->
+  <color name="result_text">#ffffffff</color>
+  <color name="result_view">#b0000000</color>
+  <color name="viewfinder_laser">#ffcc0000</color> <!-- Android standard ICS color -->
+  <color name="viewfinder_mask">#60000000</color>
+
+
+    
+</resources>

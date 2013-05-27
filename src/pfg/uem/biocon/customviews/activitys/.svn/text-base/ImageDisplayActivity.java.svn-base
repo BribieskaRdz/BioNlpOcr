@@ -1,0 +1,1291 @@
+package android.cordon.customviews.activitys;
+//package android.camera.desarrollo;
+//
+//import java.io.ByteArrayInputStream;
+//import java.io.IOException;
+//import java.util.ArrayList;
+//
+//import org.apache.commons.net.ftp.FTPClient;
+//
+//import android.app.Activity;
+//import android.app.AlertDialog;
+//import android.app.Dialog;
+//import android.app.ProgressDialog;
+//import android.content.ContentValues;
+//import android.content.DialogInterface;
+//import android.content.Intent;
+//import android.database.Cursor;
+//import android.graphics.Bitmap;
+//import android.graphics.BitmapFactory;
+//import android.os.AsyncTask;
+//import android.os.Bundle;
+//import android.provider.ContactsContract;
+//import android.util.Log;
+//import android.view.LayoutInflater;
+//import android.view.View;
+//import android.view.View.OnClickListener;
+//import android.widget.Button;
+//import android.widget.ImageView;
+//import android.widget.Toast;
+//
+//import com.example.uem.pfg.ocr.cordon.R;
+//
+//public class ImageDisplayActivity extends Activity {
+//
+//	private String TAG = getClass().getSimpleName();
+//	
+//	
+//	
+//	private  byte[] imageData;
+//	
+//	
+//    private String cod_tienda;
+//    private String Year;
+//    private String Week;
+//    private String FolderId;
+//    private String VersionID;
+//    
+//    private String directorio_fotos;
+//	
+//   	private String respuesta;
+//       
+//   	
+//   	private ArrayList<ArrayList<String>> stringList;
+//   	
+//   	
+//   	private int num_pregunta; 
+//   	
+//   	
+//   	
+//    private String Comments="";
+//    
+//   	
+//   	int TAKE_PICTURE = 1001;
+//   	
+//   	private int total_preguntas;
+//   	private int quedanPreguntas;
+//   	
+//   	
+//   	
+//    private static final int DIALOG_YES_NO_MESSAGE = 1;
+//    private static final int DIALOG_YES_NO_LONG_MESSAGE = 2;
+//    private static final int DIALOG_LIST = 3;
+//    private static final int DIALOG_PROGRESS = 4;
+//    private static final int DIALOG_SINGLE_CHOICE = 5;
+//    private static final int DIALOG_MULTIPLE_CHOICE = 6;
+//    private static final int DIALOG_TEXT_ENTRY = 7;
+//    private static final int DIALOG_MULTIPLE_CHOICE_CURSOR = 8;
+//
+//    private static final int MAX_PROGRESS = 100;
+//    
+//    
+//    
+//    private ProgressDialog mProgressDialog;
+//    
+//    
+////    private int mProgress;
+////    private Handler mProgressHandler;
+//    
+//    
+//    
+//    @Override
+//    protected Dialog onCreateDialog(int id) {
+//        switch (id) {
+//        case DIALOG_YES_NO_MESSAGE:
+//            return new AlertDialog.Builder(ImageDisplayActivity.this)
+//                .setIcon(R.drawable.alert_dialog_icon)
+//                .setTitle(R.string.alert_dialog_two_buttons_title)
+//                .setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//
+//                        /* User clicked OK so do some stuff */
+//                    }
+//                })
+//                .setNegativeButton(R.string.alert_dialog_cancel, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//
+//                        /* User clicked Cancel so do some stuff */
+//                    }
+//                })
+//                .create();
+//        case DIALOG_YES_NO_LONG_MESSAGE:
+//            return new AlertDialog.Builder(ImageDisplayActivity.this)
+//                .setIcon(R.drawable.alert_dialog_icon)
+//                .setTitle(R.string.alert_dialog_two_buttons_msg)
+//                .setMessage(R.string.alert_dialog_two_buttons2_msg)
+//                .setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//    
+//                        /* User clicked OK so do some stuff */
+//                    }
+//                })
+//                .setNeutralButton(R.string.alert_dialog_something, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//
+//                        /* User clicked Something so do some stuff */
+//                    }
+//                })
+//                .setNegativeButton(R.string.alert_dialog_cancel, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//
+//                        /* User clicked Cancel so do some stuff */
+//                    }
+//                })
+//                .create();
+//        case DIALOG_LIST:
+//            return new AlertDialog.Builder(ImageDisplayActivity.this)
+//                .setTitle(R.string.select_dialog)
+//                .setItems(R.array.select_dialog_items, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                        /* User clicked so do some stuff */
+//                        String[] items = getResources().getStringArray(R.array.select_dialog_items);
+//                        new AlertDialog.Builder(ImageDisplayActivity.this)
+//                                .setMessage("You selected: " + which + " , " + items[which])
+//                                .show();
+//                    }
+//                })
+//                .create();
+//        case DIALOG_PROGRESS:
+////            mProgressDialog = new ProgressDialog(ImageDisplayActivity.this);
+////            mProgressDialog.setIcon(R.drawable.alert_dialog_icon);
+////            mProgressDialog.setTitle(R.string.select_dialog);
+////            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+////            mProgressDialog.setMax(MAX_PROGRESS);
+////            mProgressDialog.setButton(DialogInterface.BUTTON_POSITIVE,
+////                    getText(R.string.alert_dialog_hide), new DialogInterface.OnClickListener() {
+////                public void onClick(DialogInterface dialog, int whichButton) {
+////
+////                    /* User clicked Yes so do some stuff */
+////                }
+////            });
+////            mProgressDialog.setButton(DialogInterface.BUTTON_NEGATIVE,
+////                    getText(R.string.alert_dialog_cancel), new DialogInterface.OnClickListener() {
+////                public void onClick(DialogInterface dialog, int whichButton) {
+////
+////                    /* User clicked No so do some stuff */
+////                }
+////            });
+////            return mProgressDialog;
+//        case DIALOG_SINGLE_CHOICE:
+//            return new AlertDialog.Builder(ImageDisplayActivity.this)
+//                .setIcon(R.drawable.alert_dialog_icon)
+//                .setTitle(R.string.alert_dialog_single_choice)
+//                .setSingleChoiceItems(R.array.select_dialog_items2, 0, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//
+//                        /* User clicked on a radio button do some stuff */
+//                    }
+//                })
+//                .setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//
+//                        /* User clicked Yes so do some stuff */
+//                    }
+//                })
+//                .setNegativeButton(R.string.alert_dialog_cancel, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//
+//                        /* User clicked No so do some stuff */
+//                    }
+//                })
+//               .create();
+//        case DIALOG_MULTIPLE_CHOICE:
+//            return new AlertDialog.Builder(ImageDisplayActivity.this)
+//                .setIcon(R.drawable.ic_popup_reminder)
+//                .setTitle(R.string.alert_dialog_multi_choice)
+//                .setMultiChoiceItems(R.array.select_dialog_items3,
+//                        new boolean[]{false, true, false, true, false, false, false},
+//                        new DialogInterface.OnMultiChoiceClickListener() {
+//                            public void onClick(DialogInterface dialog, int whichButton,
+//                                    boolean isChecked) {
+//
+//                                /* User clicked on a check box do some stuff */
+//                            }
+//                        })
+//                .setPositiveButton(R.string.alert_dialog_ok,
+//                        new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//
+//                        /* User clicked Yes so do some stuff */
+//                    }
+//                })
+//                .setNegativeButton(R.string.alert_dialog_cancel,
+//                        new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//
+//                        /* User clicked No so do some stuff */
+//                    }
+//                })
+//               .create();
+//            case DIALOG_MULTIPLE_CHOICE_CURSOR:
+//                String[] projection = new String[] {
+//                        ContactsContract.Contacts._ID,
+//                        ContactsContract.Contacts.DISPLAY_NAME,
+//                        ContactsContract.Contacts.SEND_TO_VOICEMAIL
+//                };
+//                Cursor cursor = managedQuery(ContactsContract.Contacts.CONTENT_URI,
+//                        projection, null, null, null);
+//                return new AlertDialog.Builder(ImageDisplayActivity.this)
+//                    .setIcon(R.drawable.ic_popup_reminder)
+//                    .setTitle(R.string.alert_dialog_multi_choice_cursor)
+//                    .setMultiChoiceItems(cursor,
+//                            ContactsContract.Contacts.SEND_TO_VOICEMAIL,
+//                            ContactsContract.Contacts.DISPLAY_NAME,
+//                            new DialogInterface.OnMultiChoiceClickListener() {
+//                                public void onClick(DialogInterface dialog, int whichButton,
+//                                        boolean isChecked) {
+//                                    Toast.makeText(ImageDisplayActivity.this,
+//                                            "Readonly Demo Only - Data will not be updated",
+//                                            Toast.LENGTH_SHORT).show();
+//                                }
+//                            })
+//                   .create();
+//        case DIALOG_TEXT_ENTRY:
+//            // This example shows how to add a custom layout to an AlertDialog
+//            LayoutInflater factory = LayoutInflater.from(this);
+//            final View textEntryView = factory.inflate(R.layout.alert_dialog_text_entry, null);
+//            return new AlertDialog.Builder(ImageDisplayActivity.this)
+//                .setIcon(R.drawable.alert_dialog_icon)
+//                .setTitle(R.string.alert_dialog_text_entry)
+//                .setView(textEntryView)
+//                .setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//    
+//                        /* User clicked OK so do some stuff */
+//                    }
+//                })
+//                .setNegativeButton(R.string.alert_dialog_cancel, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//
+//                        /* User clicked cancel so do some stuff */
+//                    }
+//                })
+//                .create();
+//        }
+//        return null;
+//    }
+//    
+//    
+//   	
+//    public void onCreate(Bundle icicle) {
+//        super.onCreate(icicle);
+//        
+//        Bundle bundle = getIntent().getExtras();
+//        if (bundle!=null) {
+//			respuesta = bundle.getString("respuesta");
+//			Log.e(TAG, "RESPUESTA dentro bundle "+respuesta);
+//			
+//			cod_tienda = bundle.getString("cod_tienda");
+//			
+//			getcoordinador = bundle.getParcelable("coordinador");
+//			Log.e(TAG,"coordinador = "+getcoordinador.getNombre());
+//			
+//			ArrayList<TiendaParcelable> tiendas = bundle.getParcelableArrayList("tiendas");
+//			Log.e(TAG,"tienda = "+tiendas.get(0).toString());
+//			
+//			getcoordinador.setTiendas(tiendas);
+//			
+//			
+//			total_preguntas = bundle.getInt("total_preguntas");
+//			Log.e(TAG,"obtengo en el bundle - total_preguntas = "+total_preguntas);
+//			
+//			
+//			Year = bundle.getString("Year");
+//			Week = bundle.getString("Week");
+//			FolderId = bundle.getString("FolderId");
+////			
+//			
+//			Log.e(TAG,"obtengo en el bundle -  = "+Year+" "+Week+" "+FolderId);
+//			directorio_fotos= "/"+bundle.getString("Year")+"/"+bundle.getString("Week")+"/"+getcoordinador.getOperator()+"/"+cod_tienda+"/"+bundle.getString("FolderId")+"/";
+//			Log.v(TAG,directorio_fotos);
+//			
+//			VersionID = bundle.getString("VersionID");
+//			Log.v(TAG,"VersionID : "+VersionID);
+//			
+//			
+//			//Imagen
+//			imageData = bundle.getByteArray("imageData");
+//			
+//			
+//			
+//			mProgressDialog = new ProgressDialog(ImageDisplayActivity.this);
+//			
+//			
+//			
+//	
+//			Comments = bundle.getString("Comments");
+//			Log.e(TAG, "-------------------------------------------- ------------ Comments "+Comments);
+//			
+//			 
+//		}
+//        
+//        
+//
+//		
+//		
+//        
+//        setContentView(R.layout.image_display_result);
+//
+//        BitmapFactory.Options options=new BitmapFactory.Options();
+//        options.inSampleSize = 5;
+//       
+//        Bitmap myImage = BitmapFactory.decodeByteArray(imageData , 0, imageData.length,options);
+//
+//
+//        ImageView imageView = (ImageView) findViewById(R.id.myPic);
+//        imageView.setImageBitmap(myImage);
+//        
+//        
+//        
+//        
+//		dbAdapter=DBAdapter.getDBAdapterInstance(this);
+//		
+//		dbAdapter.openDataBase();
+//		
+//		String query="SELECT * FROM question;";
+//		quedanPreguntas = dbAdapter.selectCountRecordsFromDBList(query, null);
+//		dbAdapter.close();
+//  		
+//		
+//		num_pregunta = total_preguntas-quedanPreguntas;
+//		num_pregunta = num_pregunta+1;
+//		
+//		
+//		
+//		
+//		dbAdapter.openDataBase();
+//		stringList = dbAdapter.selectRecordsFromDBList(query, null);
+//		dbAdapter.close();
+//		
+//		
+//  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question = "+quedanPreguntas);
+//  		
+//		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question --- "+stringList.toString());
+//		
+//		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question =  Id "+stringList.get(0).get(0));
+//		
+//  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question =  VersionID  "+stringList.get(0).get(1));
+//  		
+//  		VersionID = stringList.get(0).get(1);
+//  		
+//  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question =  pregunta_servidor_ID  "+stringList.get(0).get(2));
+//  		
+//  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question =  Description "+stringList.get(0).get(3));
+//  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question =  QuestionType "+stringList.get(0).get(4));
+//  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question =  RequirePhoto "+stringList.get(0).get(5));
+//  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question =  Valoracion "+stringList.get(0).get(6));
+//  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question =  Photo "+stringList.get(0).get(7));
+//  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question =  RequireComments "+stringList.get(0).get(8));
+//  		
+//  		
+//		
+//		Log.e(TAG, "Base de datos cerrada");
+//  		
+//		
+//		
+//		
+////        mProgressHandler = new Handler() {
+////            @Override
+////            public void handleMessage(Message msg) {
+////                super.handleMessage(msg);
+////                if (mProgress >= MAX_PROGRESS) {
+////                    mProgressDialog.dismiss();
+////                } else {
+////                    mProgress+=10;
+////                    mProgressDialog.incrementProgressBy(10);
+////                    mProgressHandler.sendEmptyMessageDelayed(0, 1000);
+////                }
+////            }
+////        };
+//        
+//        
+//		
+//		Button SI = (Button) findViewById(R.id.buttonSI);
+//		SI.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				
+////				if (imageData!=null) {
+//					
+//				 	Log.e(TAG,"onActivityResult "+respuesta);
+//				  
+//				 	
+//				 	
+//				 	
+////			          showDialog(DIALOG_PROGRESS);
+////			          mProgress = 0;
+////			          mProgressDialog.setProgress(0);
+//////			          mProgressHandler.sendEmptyMessage(0);
+////				 	
+////			          Log.w("LOGGER", "Starting...doInBackground");
+////			            
+////			            try {
+////			            	 
+//////				  			try{
+//////				  				
+//////				  			// Create a socket to the host
+//////				                Socket s = new Socket("m.game.es/MobileStores", 23);
+//////				                Log.e(TAG,"TELNET - CORRECTO");
+//////				                
+//////				                
+//////				  			}  catch (Exception e) {
+//////								// TODO: handle exception
+//////				  				Log.e(TAG,"TELNET- "+e.getMessage());
+//////							}
+////			        	
+////		                    mProgress++;
+////		                    mProgressDialog.incrementProgressBy(10);
+////			            	
+////			  			  FTPClient con = new FTPClient();
+////			  				try
+////			  				{
+////				  					Log.v(TAG, "conectando");
+////				  				    
+////				  					con.connect("212.170.159.59");
+////				  				    
+////				  				    Log.v(TAG, "conectado");
+////				  				    if (con.login("AppMobile", "p3p170p4l0735$")){
+////				  				    	Log.v(TAG, "login");
+////				  				        con.enterLocalPassiveMode(); // important!
+////				//  				        File datos = "test data";
+////				  				        
+////				  				        con.setFileType(2);
+////				  		            	
+////				  				        
+////					                    mProgress++;
+////					                    mProgressDialog.incrementProgressBy(10);
+////				  		            	
+////				  		            	
+////				  				        Log.v(TAG, "modo pasivo");
+//////				  				        FileInputStream is = new FileInputStream("");
+//////				  				        is.read(file);
+////				  				        
+////				  				        ByteArrayInputStream in = new ByteArrayInputStream(imageData);
+////				  				       
+////				  				        Log.v(TAG, "fichero a input stream");
+////				//  				        boolean result = con.storeFile("/test.jpg", is);
+////				//  				        boolean result = con.storeUniqueFile(is);
+////				  				        
+////					                    mProgress++;
+////					                    mProgressDialog.incrementProgressBy(10);
+////				  				        
+////				//  				        InputStream instream = getApplicationContext().openFileInput(mImageFile.getAbsolutePath());
+////				//  				        InputStream instream = getApplicationContext().openFileInput("PIC"+System.currentTimeMillis()+".jpg");
+////				  				    
+////				  				        
+////				  				        Log.v(TAG, "changeWorkingDirectory   -"+directorio_fotos+"-     "+con.printWorkingDirectory());
+////				
+////				  				        
+//////				  				        asdf
+//////				  				        con.changeWorkingDirectory(num_pregunta+"/"+getcoordinador.getOperator()+"/"+cod_tienda+"/"+"prueba1");
+////				  				        con.makeDirectory(Year);
+////				  				        con.changeWorkingDirectory(Year);
+////				  				        
+////				  				        con.makeDirectory(Week);
+////				  				        con.changeWorkingDirectory(Week);
+////
+////				  				        con.makeDirectory(getcoordinador.getOperator());
+////				  				        con.changeWorkingDirectory(getcoordinador.getOperator());
+////
+////				  				        con.makeDirectory(cod_tienda);
+////				  				        con.changeWorkingDirectory(cod_tienda);
+////
+////				  				        con.makeDirectory(FolderId);
+////				  				        con.changeWorkingDirectory(FolderId);	  				        
+////				  				        
+////				  				          Log.v(TAG, "changeWorkingDirectory"+con.printWorkingDirectory());
+////				
+////					                    mProgress++;
+////					                    mProgressDialog.incrementProgressBy(10);
+////				  				        
+////				  				      Log.v(TAG, "storefile");
+////				  				      	
+////					                    mProgress++;
+////					                    mProgressDialog.incrementProgressBy(10);
+////				  				       
+////				  				       
+////				  				        con.storeFile(num_pregunta+".jpg", in);
+////				  				        in.close();
+////				  			            
+////					                    mProgress++;
+////					                    mProgressDialog.incrementProgressBy(40);
+////			        				    
+////				  				        //METER EL nombre de la foto en la bd
+////				  				        
+////				  				        Log.v(TAG, "guardado");
+////				  				        in.close();
+////				  				        Log.v(TAG, "cerrado");
+////				//  				        if (result){ 
+////				//  				        	Log.v(TAG, "succeeded");
+////				//  				        }
+////				  				        
+////				  				    }
+////				  				}
+////				  				catch (Exception e)
+////				  				{
+////				  					Log.e(TAG, "ERROR "+e.getMessage() +"    ");
+////				  				}
+////				
+////				
+////				  				try
+////				  				{
+////				  				    con.logout();
+////				  				    con.disconnect();
+////				  				}
+////				  				catch (IOException e)
+////				  				{
+////				  					Log.e(TAG,e.getMessage());
+////				  				}
+////				  				
+////
+////			                    mProgress++;
+////			                    mProgressDialog.incrementProgressBy(10);
+////				  			  
+////				  				
+////			            } catch (Exception e) {
+////			                Log.e(TAG,e.getMessage());
+////			            }
+//////				 	
+////				 	
+////			            
+////			            imageData = null;
+////			         // if you have any other references to the object,
+////			         // then you shoud also assign null them here
+////			            System.gc(); // cost ~10-20ms
+////			            System.gc();
+////			            
+////			            
+////			            mProgressDialog.dismiss();
+//				 	
+//				 	
+//
+//				 	
+//				 	mProgressDialog = new ProgressDialog(ImageDisplayActivity.this);
+//				 	mProgressDialog.setMessage("Subiendo Foto...");
+//					mProgressDialog.setTitle(" ");
+//					mProgressDialog.setIcon(R.drawable.logo_white_48a);
+////					progress.show();
+//					new DialogoCargado(mProgressDialog,imageData).execute();
+//					
+//					
+//					
+//					
+//					
+////				 	mProgressDialog.setMessage("Subiendo informe ...");
+////		     		mProgressDialog.setTitle("INFORME");
+//////		     		progress.setButton("Cancelar", new DialogInterface.OnClickListener() 
+//////		             {
+//////		                 public void onClick(DialogInterface dialog, int which) 
+//////		                 {
+//////		                     // Use either finish() or return() to either close the activity or just the dialog
+//////		                     return;
+//////		                 }
+//////		             });
+//////		     		progress.setIcon(R.drawable.logo_white_48a);
+//////		     		progress.show();
+////
+////				 	new taskDoftp(mProgressDialog,imageData).execute();
+//				 	
+////				}
+//				
+//			}
+//		});
+//		
+//		
+//		Button NO = (Button) findViewById(R.id.buttonNO);
+//		NO.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				
+//				//Activo camara activity personal
+//				Intent intent = new Intent(ImageDisplayActivity.this, EditPhoto_antigua.class);
+//				
+//				
+//	            
+////	            NO.setEnabled(true);
+//	            
+////	            startActivityForResult(intent, TAKE_PHOTO_CODE);
+//				
+//				 
+//				intent.putExtra("respuesta", respuesta);
+//				
+//				
+//				intent.putExtra("cod_tienda", cod_tienda);
+//				Log.v(TAG,"paso en el bundle - cod_tienda = "+cod_tienda);
+//				
+////				CoordinadorParcelable coordinador = new CoordinadorParcelable();
+////				coordinador.setIntValue(0);
+////				coordinador.setNombre(getcoordinador.getNombre());
+////				coordinador.setEmail(getcoordinador.getEmail());
+////				coordinador.setOperator(getcoordinador.getOperator());
+////				coordinador.setId(getcoordinador.getImei());
+////				coordinador.setRegion(getcoordinador.getRegion());
+//				intent.putExtra("coordinador", getcoordinador);
+//				
+//				//TIENDAS DE ESE COORDINADOR
+//				intent.putParcelableArrayListExtra("tiendas", getcoordinador.getTiendas());
+//				Log.i(TAG,"paso al bundle - total_preguntas = "+total_preguntas);
+//				intent.putExtra("total_preguntas", total_preguntas);
+//				
+//				intent.putExtra("Year", Year);
+//				intent.putExtra("Week", Week);
+//				intent.putExtra("FolderId", FolderId);
+//				intent.putExtra("VersionID", VersionID);
+//				
+//				
+//				
+//				startActivity(intent);
+//				
+//				finish();
+//				
+//			}
+//		});
+//  		
+//		
+//		
+//		
+//    }
+//    
+//    
+//    
+//    
+//	private void InsertarRespuesta( String Respuesta){
+//    	
+//    	
+//    	
+//    	Log.i(this.getClass().getSimpleName(),"SELECT * FROM question --- "+stringList.toString());
+//		
+//		
+//		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question =  Id "+stringList.get(0).get(0));
+//		
+//  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question =  VersionID  "+stringList.get(0).get(1));
+//  		
+//  		
+////  		VersionID = stringList.get(0).get(1);
+//  		
+//  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question =  pregunta_servidor_ID  "+stringList.get(0).get(2));
+//  		
+//  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question =  Description "+stringList.get(0).get(3));
+//  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question =  QuestionType "+stringList.get(0).get(4));
+//  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question =  RequirePhoto "+stringList.get(0).get(5));
+//  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question =  Valoracion "+stringList.get(0).get(6));
+//  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question =  Photo "+stringList.get(0).get(7));
+//  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question =  RequireComments "+stringList.get(0).get(8));
+////  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question =  Region "+stringList.get(0).get(7));
+//  		
+//  		
+////    	Log.i(this.getClass().getSimpleName(),"SELECT * FROM question = 0 Id a"+stringList.get(0).get(0));
+////  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question = 1 Id b "+stringList.get(0).get(1));
+////  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question = 2 Description "+stringList.get(0).get(2));
+////  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question = 3 QuestionType "+stringList.get(0).get(3));
+////  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question = 4 RequirePhoto "+stringList.get(0).get(4));
+////  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question = 5 Photo "+stringList.get(0).get(5));
+////  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question = 6 RequireComments "+stringList.get(0).get(6));
+////  		Log.i(this.getClass().getSimpleName(),"SELECT * FROM question = 7 Region "+stringList.get(0).get(7));
+//  	
+//  		
+//		dbAdapter.close();
+//		dbAdapter.openDataBase();
+//		
+//		
+//		try{
+//			//Borro la primera pregunta de la BD, ya est‡ contestada
+//			
+//			
+//			Log.e(TAG,"num_pregunta (le sumo 1, pq el indice de la bd empieza en 1 y no en 0) = "+num_pregunta +" total_preguntas = "+total_preguntas +" quedanPreguntas = "+quedanPreguntas);
+//			
+//			
+//			
+////			Inserto Respuesta en 
+//			ContentValues initialValues = new ContentValues();
+//			
+//
+//			
+//			Log.v(TAG,"---------------------------------------------------------------------------------------------------------------------------------------------");
+//	  		Log.v(this.getClass().getSimpleName(),"pregunta_servidor_ID:"+stringList.get(0).get(2));
+//			Log.v(this.getClass().getSimpleName(),"Valoration:"+stringList.get(0).get(6));
+//	  		Log.v(this.getClass().getSimpleName(),"ReportId:"+"");
+//			Log.v(this.getClass().getSimpleName(),"QuestionTypeId:"+stringList.get(0).get(4));
+//	  		Log.v(this.getClass().getSimpleName(),"Question:"+stringList.get(0).get(3));
+//	  		Log.v(this.getClass().getSimpleName(),"Answer:"+respuesta);
+//			if (stringList.get(0).get(5).equals("true")){
+//				Log.v(this.getClass().getSimpleName(),"Photo:"+stringList.get(0).get(3));
+//			}else{
+//				Log.v(this.getClass().getSimpleName(),"Photo:");
+//			}	
+//			
+//			if(Comments!=null && Comments != ""){
+//				Log.v(this.getClass().getSimpleName(),"Comments:"+ Comments);
+//			}else{
+//				Log.v(this.getClass().getSimpleName(),"Comments:"+ "" + "OJO NULLLLLLL");
+//			}
+//	  		Log.v(this.getClass().getSimpleName(),"Comments:"+Comments);
+//	  		Log.v(TAG,"---------------------------------------------------------------------------------------------------------------------------------------------");
+//	  		
+//	  		
+//			initialValues.put("Valoration", stringList.get(0).get(6));
+//			initialValues.put("ReportId", "");
+//			initialValues.put("QuestionTypeId", stringList.get(0).get(4));
+//			initialValues.put("Question", stringList.get(0).get(3));
+//			initialValues.put("Answer", respuesta);
+//			if (stringList.get(0).get(5).equals("true")){
+//				initialValues.put("Photo", directorio_fotos+num_pregunta+".jpg");
+//			}else{
+//				initialValues.put("Photo", "");
+//			}
+//			
+//			
+//			if(Comments!=null && Comments != ""){
+//				initialValues.put("Comments", Comments);
+//			}else{
+//				initialValues.put("Comments", "");
+//			}
+////			initialValues.put("Comments", Comments);
+//			initialValues.put("pregunta_servidor_ID", stringList.get(0).get(2));
+//			
+//	  		
+//			long n = dbAdapter.insertRecordsInDB("Answers", null, initialValues);				
+////			Toast.makeText(ActivityPreguntaSNImagenComentario.this, "new row inserted with id = "+n, Toast.LENGTH_SHORT).show();
+//			if (n>=1){
+//				Log.i(TAG,"Respuesta insertada - "+n);	
+//			}else{
+//				Log.i(TAG,"ERROR AL insertar respuesta - "+n);
+//			}
+//
+//			
+//
+//			
+//			
+////			Borro pregunta ya respondida de la lista de preguntas
+//			String id = String.valueOf(num_pregunta);
+//			String[] whereArgs = {id};
+//			long n2 = dbAdapter.deleteRecordInDB("question", " id = ?", whereArgs);
+//			Log.i(this.getClass().getSimpleName(),"Borro elemento ="+id+" - resultado : "+n2);
+//
+//			
+//			
+//			
+//			
+//			Intent intent = new Intent(getApplicationContext(),ActivityPreguntaSNImagenComentario.class);
+//			intent.putExtra("cod_tienda", cod_tienda);
+//			
+////			CoordinadorParcelable coordinador = new CoordinadorParcelable();
+////			coordinador.setIntValue(0);
+////			coordinador.setNombre(getcoordinador.getNombre());
+////			coordinador.setEmail(getcoordinador.getEmail());
+////			coordinador.setOperator(getcoordinador.getOperator());
+////			coordinador.setId(getcoordinador.getImei());
+////			coordinador.setRegion(getcoordinador.getRegion());
+//			intent.putExtra("coordinador", getcoordinador);
+//			
+//			//TIENDAS DE ESE COORDINADOR
+//			intent.putParcelableArrayListExtra("tiendas", getcoordinador.getTiendas());
+//			Log.i(TAG,"paso al bundle - total_preguntas = "+total_preguntas);
+//			intent.putExtra("total_preguntas", total_preguntas);
+//			
+//			intent.putExtra("Year", Year);
+//			intent.putExtra("Week", Week);
+//			intent.putExtra("FolderId", FolderId);
+//			
+//			intent.putExtra("VersionID", VersionID);
+//			
+//			
+//			startActivity(intent);
+//			dbAdapter.close();
+//			finish();
+//		}catch (Exception e) {
+//			// TODO: handle exception
+////			Toast.makeText(getApplicationContext(), "Cuestionario finalizado.", 1000).show();
+//			
+//			dbAdapter.close();
+//			finish();
+//		}
+//		
+//		
+//		
+//		
+//    } 
+//	
+//    
+////    
+////    private class taskDoftp extends AsyncTask<Long, Integer, Integer> 
+////    {
+////	  
+////	  private ProgressDialog progress;
+////	  private byte[] file;
+////	  
+////	  public taskDoftp(ProgressDialog prog, byte[] mImageFile) {
+//////	  public taskDoftp( byte[] mImageFile) {
+////		  this.progress = prog;
+////		 
+////		  this.setFile(mImageFile);
+////		  Log.w(TAG,"Obtengo imagen");
+////		  
+//////          showDialog(DIALOG_PROGRESS);
+//////          mProgress = 0;
+//////          mProgressDialog.setProgress(0);
+//////          mProgressHandler.sendEmptyMessage(0);
+////		  
+////	  }
+////
+////	  
+////	  
+////	  
+////		    @Override
+////		protected void onCancelled() {
+////			// TODO Auto-generated method stub
+////			super.onCancelled();
+////		}
+////		    
+////	
+////	
+////	
+////	
+////		@Override
+////		protected void onPreExecute() {
+////			// TODO Auto-generated method stub
+////			super.onPreExecute();
+////			progress.show();
+////
+////		}
+////		
+////		
+////
+////
+////
+////
+////		@Override
+////		protected void onProgressUpdate(Integer... values) {
+////			// TODO Auto-generated method stub
+////			super.onProgressUpdate(values);
+////			
+////			
+////			
+//////	        mProgressHandler = new Handler() {
+//////	            @Override
+//////	            public void handleMessage(Message msg) {
+//////	                super.handleMessage(msg);
+//////	                if (mProgress >= MAX_PROGRESS) {
+//////	                    mProgressDialog.dismiss();
+//////	                } else {
+//////	                    mProgress++;
+//////	                    mProgressDialog.incrementProgressBy(10);
+//////	                    mProgressHandler.sendEmptyMessageDelayed(0, 100);
+//////	                }
+//////	            }
+//////	        };
+////	        
+////	        
+////		}
+////
+////		@Override
+////        protected Integer doInBackground(Long... params) {
+////            Log.w("LOGGER", "Starting...doInBackground");
+////            
+////            try {
+////            	 
+////            	
+////  			  FTPClient con = new FTPClient();
+////  				try
+////  				{
+////	  					Log.v(TAG, "conectando");
+////	  				    
+////	  					con.connect("212.170.159.59");
+////	  				    
+////	  				    Log.v(TAG, "conectado");
+////	  				    if (con.login("AppMobile", "p3p170p4l0735$")){
+////	  				    	Log.v(TAG, "login");
+////	  				        con.enterLocalPassiveMode(); // important!
+////	//  				        File datos = "test data";
+////	  				        
+////	  				        con.setFileType(2);
+////	  		            	
+////	  				        
+////	  		            	
+////	  				        Log.v(TAG, "modo pasivo");
+//////	  				        FileInputStream is = new FileInputStream("");
+//////	  				        is.read(file);
+////	  				        
+////	  				        ByteArrayInputStream in = new ByteArrayInputStream(file);
+////	  				       
+////	  				        Log.v(TAG, "fichero a input stream");
+////	//  				        boolean result = con.storeFile("/test.jpg", is);
+////	//  				        boolean result = con.storeUniqueFile(is);
+////	  				        
+////	  		            	
+////	  				        
+////	//  				        InputStream instream = getApplicationContext().openFileInput(mImageFile.getAbsolutePath());
+////	//  				        InputStream instream = getApplicationContext().openFileInput("PIC"+System.currentTimeMillis()+".jpg");
+////	  				    
+////	  				        
+////	  				        Log.v(TAG, "changeWorkingDirectory   -"+directorio_fotos+"-     "+con.printWorkingDirectory());
+////	
+////	  				        
+//////	  				        asdf
+//////	  				        con.changeWorkingDirectory(num_pregunta+"/"+getcoordinador.getOperator()+"/"+cod_tienda+"/"+"prueba1");
+////	  				        con.makeDirectory(Year);
+////	  				        con.changeWorkingDirectory(Year);
+////	  				        
+////	  				        con.makeDirectory(Week);
+////	  				        con.changeWorkingDirectory(Week);
+////
+////	  				        con.makeDirectory(getcoordinador.getOperator());
+////	  				        con.changeWorkingDirectory(getcoordinador.getOperator());
+////
+////	  				        con.makeDirectory(cod_tienda);
+////	  				        con.changeWorkingDirectory(cod_tienda);
+////
+////	  				        con.makeDirectory(FolderId);
+////	  				        con.changeWorkingDirectory(FolderId);	  				        
+////	  				        
+////	  				          Log.v(TAG, "changeWorkingDirectory"+con.printWorkingDirectory());
+////	
+////	  		            	
+////	  				        
+////	  				      Log.v(TAG, "storefile");
+////	  				      	
+////	  				       
+////	  				       
+////	  				       
+////	  				        con.storeFile(num_pregunta+".jpg", in);
+////	  				        in.close();
+////	  			            
+////        				    
+////        				    
+////	  				        //METER EL nombre de la foto en la bd
+////	  				        
+////	  				        Log.v(TAG, "guardado");
+////	  				        in.close();
+////	  				        Log.v(TAG, "cerrado");
+////	//  				        if (result){ 
+////	//  				        	Log.v(TAG, "succeeded");
+////	//  				        }
+////	  				        
+////	  				    }
+////	  				}
+////	  				catch (Exception e)
+////	  				{
+////	  					Log.e(TAG, "ERROR "+e.getMessage() +"    ");
+////	  				}
+////	
+////	
+////	  				try
+////	  				{
+////	  				    con.logout();
+////	  				    con.disconnect();
+////	  				}
+////	  				catch (IOException e)
+////	  				{
+////	  					Log.e(TAG,e.getMessage());
+////	  				}
+////	  				
+////	  				
+////	  			     
+////	  			  
+////	  				
+////            } catch (Exception e) {
+////                Log.e(TAG,e.getMessage());
+////            }
+////            return 0;
+////        }
+////
+////        @Override
+////        protected void onPostExecute(Integer result) {
+////            Log.w("LOGGER", "...Done");
+//////            if(getFile().delete()){
+////////            	Toast.makeText(getApplicationContext(), "Borrado correctamente", Toast.LENGTH_SHORT).show();
+//////            	Log.w("LOGGER", "...Borrado correctamente");
+//////            }else{
+////////            	Toast.makeText(getApplicationContext(), "Error al borrar ", Toast.LENGTH_SHORT).show();
+//////            	Log.w("LOGGER", "...Error al borrar ");
+//////            }
+////            
+////            progress.dismiss();
+////			    
+////			    
+////            file = null;
+////            imageData = null;
+////         // if you have any other references to the object,
+////         // then you shoud also assign null them here
+//////            System.gc(); // cost ~10-20ms
+//////            System.gc();
+////            
+////            
+////            
+////
+////            
+////        }
+////
+////		public byte[] getFile() {
+////			return file;
+////		}
+////
+////		public void setFile(byte[] file) {
+////			this.file = file;
+////		}
+////    }
+////    
+//    
+//    
+//    @Override
+//	public void onBackPressed() {
+//
+//    	//Activo camara activity personal
+//		Intent intent = new Intent(ImageDisplayActivity.this, EditPhoto_antigua.class);
+//		
+//		
+//		
+////        mProgressDialog.dismiss();
+//		
+//        
+//        
+//        
+//		intent.putExtra("respuesta", respuesta);
+//		
+//		
+//		intent.putExtra("cod_tienda", cod_tienda);
+//		Log.v(TAG,"paso en el bundle - cod_tienda = "+cod_tienda);
+//		
+////		CoordinadorParcelable coordinador = new CoordinadorParcelable();
+////		coordinador.setIntValue(0);
+////		coordinador.setNombre(getcoordinador.getNombre());
+////		coordinador.setEmail(getcoordinador.getEmail());
+////		coordinador.setOperator(getcoordinador.getOperator());
+////		coordinador.setId(getcoordinador.getImei());
+////		coordinador.setRegion(getcoordinador.getRegion());
+//		intent.putExtra("coordinador", getcoordinador);
+//		
+//		//TIENDAS DE ESE COORDINADOR
+//		intent.putParcelableArrayListExtra("tiendas", getcoordinador.getTiendas());
+//		Log.i(TAG,"paso al bundle - total_preguntas = "+total_preguntas);
+//		intent.putExtra("total_preguntas", total_preguntas);
+//		
+//		intent.putExtra("Year", Year);
+//		intent.putExtra("Week", Week);
+//		intent.putExtra("FolderId", FolderId);
+//		intent.putExtra("VersionID", VersionID);
+//		
+//		
+//		startActivity(intent);
+//		
+//		finish();
+//		
+//	    
+//	    
+//	}
+//    
+//    
+//    
+//    
+//	
+//    
+//  	public class DialogoCargado extends AsyncTask<Void, Void, Integer> {
+//  		private ProgressDialog progress;
+//  		private byte[] file;
+//  		
+//  		
+//    		  public DialogoCargado(ProgressDialog progress, byte[] mImageFile) {
+//    			  this.progress = progress;
+//    			  this.file = mImageFile;
+//  		  }
+//  		
+//  		  public void onPreExecute() {
+//  			  
+//  			  
+//  				
+//  			  progress.show();
+//  		  }
+//
+//  		  
+//  		  @Override
+//  		    protected Integer doInBackground(Void... params) 
+//  		    {
+//  				    
+//  						try {
+//  							//Limpio Heap antes de llamar al ws
+//  							System.gc();
+//  							System.gc();//X2
+//  							
+//  							
+//  							FTPClient con = new FTPClient();
+//  				  				    
+//  				  					con.connect("212.170.159.59");
+//  				  				    
+//  				  				    Log.v(TAG, "conectado");
+//  				  				    if (con.login("AppMobile", "p3p170p4l0735$")){
+//  				  				    	Log.v(TAG, "login");
+//  				  				        con.enterLocalPassiveMode(); // important!
+//  				//  				        File datos = "test data";
+//  				  				        
+//  				  				        con.setFileType(2);
+//  				  		            	
+//  				  				        
+//  				  		            	
+//  				  				        Log.v(TAG, "modo pasivo");
+////  				  				        FileInputStream is = new FileInputStream("");
+////  				  				        is.read(file);
+//  				  				        
+//  				  				        ByteArrayInputStream in = new ByteArrayInputStream(file);
+//  				  				       
+//  				  				        Log.v(TAG, "fichero a input stream");
+//  				//  				        boolean result = con.storeFile("/test.jpg", is);
+//  				//  				        boolean result = con.storeUniqueFile(is);
+//  				  				        
+//  				  		            	
+//  				  				        
+//  				//  				        InputStream instream = getApplicationContext().openFileInput(mImageFile.getAbsolutePath());
+//  				//  				        InputStream instream = getApplicationContext().openFileInput("PIC"+System.currentTimeMillis()+".jpg");
+//  				  				    
+//  				  				        
+//  				  				        Log.v(TAG, "changeWorkingDirectory   -"+directorio_fotos+"-     "+con.printWorkingDirectory());
+//  				
+//  				  				        
+////  				  				        asdf
+////  				  				        con.changeWorkingDirectory(num_pregunta+"/"+getcoordinador.getOperator()+"/"+cod_tienda+"/"+"prueba1");
+//  				  				        con.makeDirectory(Year);
+//  				  				        con.changeWorkingDirectory(Year);
+//  				  				        
+//  				  				        con.makeDirectory(Week);
+//  				  				        con.changeWorkingDirectory(Week);
+//
+//  				  				        con.makeDirectory(getcoordinador.getOperator());
+//  				  				        con.changeWorkingDirectory(getcoordinador.getOperator());
+//
+//  				  				        con.makeDirectory(cod_tienda);
+//  				  				        con.changeWorkingDirectory(cod_tienda);
+//
+//  				  				        con.makeDirectory(FolderId);
+//  				  				        con.changeWorkingDirectory(FolderId);	  				        
+//  				  				        
+//  				  				          Log.v(TAG, "changeWorkingDirectory"+con.printWorkingDirectory());
+//  				
+//  				  		            	
+//  				  				        
+//  				  				      Log.v(TAG, "storefile");
+//  				  				      	
+//  				  				       
+//  				  				       
+//  				  				       
+//  				  				        con.storeFile(num_pregunta+".jpg", in);
+//  				  				        in.close();
+//  				  			            
+//  			        				    
+//  			        				    
+//  				  				        //METER EL nombre de la foto en la bd
+//  				  				        
+//  				  				        Log.v(TAG, "guardado");
+//  				  				        in.close();
+//  				  				        Log.v(TAG, "cerrado");
+//  				//  				        if (result){ 
+//  				//  				        	Log.v(TAG, "succeeded");
+//  				//  				        }
+//  				  				        
+//  				  				    }
+//  				  				
+//
+//  				
+//  				  				try
+//  				  				{
+//  				  				    con.logout();
+//  				  				    con.disconnect();
+//  				  				}
+//  				  				catch (IOException e)
+//  				  				{
+//  				  					Log.e(TAG,e.getMessage());
+//  				  				}
+//  				  				
+//		  						
+//  				  				InsertarRespuesta(respuesta);
+//  				  			
+//  				  				
+//  				  				return 0;
+//		  							
+//  				  				
+//  						}catch (OutOfMemoryError e) {
+//  							// TODO: handle exception
+//  							return 1;
+//  						}catch (Exception e) {
+//  							// TODO: handle exception
+//  							return -1;
+//  						}
+//
+//  			  
+//  		    }
+//  		  
+//  		  
+//  		  @Override
+//  		    protected void onPostExecute(Integer result)
+//  		        {
+//  		       		if(result==0)
+//  		            {
+//
+//	  		           
+//	//  		            if(getFile().delete()){
+//	////  		            	Toast.makeText(getApplicationContext(), "Borrado correctamente", Toast.LENGTH_SHORT).show();
+//	//  		            	Log.w("LOGGER", "...Borrado correctamente");
+//	//  		            }else{
+//	////  		            	Toast.makeText(getApplicationContext(), "Error al borrar ", Toast.LENGTH_SHORT).show();
+//	//  		            	Log.w("LOGGER", "...Error al borrar ");
+//	//  		            }
+//	  		            
+//	  		            progress.dismiss();
+//	  					    
+//	  					    
+//	  		            file = null;
+//	  		            imageData = null;
+//	  		          
+//	  		            
+//	  		            
+//	  				 
+//	  		          
+//	  		          
+//	  		            Log.w("LOGGER", "...Done");
+//	  		            
+//  		       		}else if(result==-1)  {
+//
+////  										Toast.makeText(getApplicationContext(), "Problema de red. ", Toast.LENGTH_SHORT).show();
+//  							Log.e(TAG,"Problema de red. ");
+//
+//  							finish();
+//  					}
+//  		       		else if(result==1)  {
+//
+////  										Toast.makeText(getApplicationContext(), "No hay suficiente memoria para abrir el informe.", Toast.LENGTH_SHORT).show();
+//  							Log.e(TAG,"No hay suficiente memoria para abrir el informe.");
+//  							Toast.makeText(getApplicationContext(), "No hay suficiente memoria para abrir el informe.Liberando Memoria...", Toast.LENGTH_SHORT).show();
+//  							System.gc();
+//  							System.gc();
+//  							finish();
+//  							
+//  	//						arrayBT.destroyDrawingCache();
+////  							finish();
+//  					}else if(result==-2)  {
+//
+////  										Toast.makeText(getApplicationContext(), "No hay suficiente memoria para abrir el informe.", Toast.LENGTH_SHORT).show();
+//  						Log.e(TAG,"Error en la transmisi—n.");
+//  						Toast.makeText(getApplicationContext(), "Error en la transmisi—n.", Toast.LENGTH_SHORT).show();
+//  						System.gc();
+//  						System.gc();
+//  						finish();
+//  						
+////  							finish();
+//  					}
+//  	       		
+//
+//  		       		progress.dismiss();
+//  		        }
+//
+//  	}
+//
+//    
+//    
+//    
+//}
+//
+//
+//

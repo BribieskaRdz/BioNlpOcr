@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shapestart"
+    tools:context=".ActivitMainMenu" >
+
+    <android.cordon.customviews.ActionBar
+        android:id="@+id/actionbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+    </android.cordon.customviews.ActionBar>
+
+    <EditText
+        android:id="@+id/editTextResultado"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/TextViewURL"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/buttonProcesar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/actionbar"
+        android:layout_margin="@dimen/CincoDp"
+        android:background="@drawable/boton_remedy_naranja"
+        android:text="Procesar"
+        android:textColor="@color/Blanco" />
+
+    <TextView
+        android:id="@+id/TextViewURL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/actionbar"
+        android:layout_toLeftOf="@+id/buttonProcesar"
+        android:lines="@integer/tres"
+        android:padding="@dimen/undp"
+        android:shadowColor="@color/Negro"
+        android:shadowDx="2"
+        android:text="texto"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/Remedy_GrisVerde"
+        android:textSize="@dimen/QuinceDP" />
+
+</RelativeLayout>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/shapestart"
+    android:padding="4dip" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/LinearLayout01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:id="@+id/LinearLayoutComentario"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/boton_remedy_naranja"
+                    android:gravity="center"
+                    android:padding="@dimen/undp" >
+
+                    <TableLayout
+                        android:id="@+id/TableLayout08"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <TableRow
+                            android:id="@+id/TableRow28"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" >
+
+                            <LinearLayout
+                                android:id="@+id/LinearLayout23"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" >
+
+                                <TextView
+                                    android:id="@+id/TextViewComentario"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/shape_producto_gris"
+                                    android:gravity="center"
+                                    android:text="Comentario"
+                                    android:textColor="@color/Blanco"
+                                    android:textSize="10dp" />
+                            </LinearLayout>
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/TableRow08"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" >
+
+                            <LinearLayout
+                                android:id="@+id/LinearLayout09"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" >
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="@dimen/CincoDp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/boton_remedy_gris"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:padding="@dimen/TreintaDP" >
+
+                                    <ImageView
+                                        android:id="@+id/ImageView16"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/collections_view_as_list" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="@dimen/CincoDp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/boton_remedy_gris"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:padding="@dimen/TreintaDP" >
+
+                                    <ImageView
+                                        android:id="@+id/ImageView15"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/content_edit" />
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/TableRow07"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" >
+
+                            <LinearLayout
+                                android:id="@+id/LinearLayout08"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" >
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="@dimen/CincoDp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/boton_remedy_gris"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:padding="@dimen/TreintaDP" >
+
+                                    <ImageView
+                                        android:id="@+id/ImageView14"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/content_edit" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="@dimen/CincoDp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/boton_remedy_gris"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:padding="@dimen/TreintaDP" >
+
+                                    <ImageView
+                                        android:id="@+id/ImageView13"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/collections_view_as_list" />
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </TableRow>
+                    </TableLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:visibility="gone" >
+
+            <LinearLayout
+                android:id="@+id/linearLayout7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:gravity="center" >
+
+                <Button
+                    android:id="@+id/buttonUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/action_search"
+                    android:text="Actualizar Contenido"
+                    android:textColor="@color/Blanco"
+                    android:textStyle="bold|italic" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="gone" >
+        </ListView>
+    </LinearLayout>
+
+</ScrollView>

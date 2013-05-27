@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/test_repo/!svn/ver/9/uem.pfg.ocr_bce.android/bin
+END
+uem.pfg.ocr_bce.android.apk
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/test_repo/!svn/ver/9/uem.pfg.ocr_bce.android/bin/uem.pfg.ocr_bce.android.apk
+END
+AndroidManifest.xml
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/test_repo/!svn/ver/8/uem.pfg.ocr_bce.android/bin/AndroidManifest.xml
+END
+resources.ap_
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/test_repo/!svn/ver/9/uem.pfg.ocr_bce.android/bin/resources.ap_
+END
+jarlist.cache
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/test_repo/!svn/ver/8/uem.pfg.ocr_bce.android/bin/jarlist.cache
+END
+classes.dex
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/test_repo/!svn/ver/9/uem.pfg.ocr_bce.android/bin/classes.dex
+END
