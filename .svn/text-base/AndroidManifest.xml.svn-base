@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.uem.pfg.ocr_bce.android"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="10"
+        android:targetSdkVersion="17" />
+
+    
+    <!-- PERMISOS -->
+    <uses-permission android:name="android.permission.NFC" />
+	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+	<uses-permission android:name="android.permission.LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+	<uses-permission android:name="android.permission.CAMERA" />
+   	<uses-permission android:name="android.permission.WRITE_SETTINGS"></uses-permission>
+	<uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>    
+
+	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+	<uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+	<uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+	<uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+	<uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+	
+	<uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.xmppService.permission.XMPP_SERVICE" />
+    <uses-permission android:name="android.permission.RUN_INSTRUMENTATION" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+  	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>    
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+	<uses-permission android:name="android.permission.CAMERA" />
+   	<uses-permission android:name="android.permission.WRITE_SETTINGS"></uses-permission>
+	<uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>    
+	
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE">
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE">
+    </uses-permission>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE">
+    </uses-permission>
+    
+	
+	<uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+    
+    <uses-feature android:name="android.hardware.nfc" android:required="true" />
+    
+    
+    
+    
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".ActivitySplash"
+            android:label="@string/app_name"
+			android:theme="@android:style/Theme.Translucent.NoTitleBar"   >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.uem.pfg.ocr_bce.android.ActivityMainMenu"
+            android:label="@string/title_activity_activit_main_menu" >
+        </activity>
+        <activity
+            android:name="android.cordon.customviews.activitys.ActivityScrollableMenu"
+            android:theme="@android:style/Theme.NoTitleBar"   
+            android:configChanges="keyboardHidden|orientation"   
+			android:launchMode="singleTask"  >
+        </activity>
+        <activity
+            android:name=".ListdataActivity"
+            android:theme="@android:style/Theme.NoTitleBar"   
+            android:label="@string/title_activity_listdata" >
+        </activity>
+        <activity
+            android:name=".ActivitySettings"
+            android:theme="@android:style/Theme.NoTitleBar"   
+            android:launchMode="singleTask"  
+            android:label="@string/title_activity_listdata" >
+        </activity>
+        <activity 
+            android:name=".ActivityProcesarURL"
+            android:theme="@android:style/Theme.NoTitleBar"   
+            android:launchMode="singleTask"  
+            android:label="@string/title_activity_listdata" >
+        </activity>
+        
+        
+         <!-- com.itwizard.mezzofanti.Mezzofanti -->
+        <activity
+            android:name="com.itwizard.mezzofanti.Camera"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name="com.itwizard.mezzofanti.PreferencesActivity"
+            android:label="@string/preferences_name" >
+        </activity>
+        <activity
+            android:name="com.itwizard.mezzofanti.PreferenciasActivity"
+            android:label="@string/preferences_name" >
+        </activity>
+        <activity
+            android:name="com.itwizard.mezzofanti.ResultsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/resultsactivity_name" >
+        </activity>
+        <activity
+            android:name="com.itwizard.mezzofanti.ResultadoActivity"
+            android:theme="@android:style/Theme.NoTitleBar"   
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/resultsactivity_name" >
+        </activity>
+        <activity
+            android:name="com.itwizard.mezzofanti.TranslateActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/translateactivity_name"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        </activity>
+
+        
+       
+        <!-- INTENT HANDLER -->
+        <activity android:name=".ActivityGetIntents"
+            android:theme="@android:style/Theme.NoTitleBar"   
+            android:label="Consultar Conceptos Biomédicos" >
+            
+            <!-- IMAGES -->
+		    <intent-filter>
+		        <action android:name="android.intent.action.SEND" />
+		        <category android:name="android.intent.category.DEFAULT" />
+		        <data android:mimeType="image/*" />
+		    </intent-filter>
+		    <intent-filter>
+		        <action android:name="android.intent.action.SEND_MULTIPLE" />
+		        <category android:name="android.intent.category.DEFAULT" />
+		        <data android:mimeType="image/*" />
+		    </intent-filter>
+		    
+		     <!-- TEXT -->
+		    <intent-filter>
+		        <action android:name="android.intent.action.SEND" />
+		        <category android:name="android.intent.category.DEFAULT" />
+		        <data android:mimeType="text/plain" />
+		    </intent-filter>
+
+		     <!-- WEB -->
+ 			<intent-filter>
+              <action android:name="android.intent.action.VIEW" />
+              <category android:name="android.intent.category.DEFAULT" />
+              <data android:scheme="http"/> 
+			  <data android:scheme="https"/>
+          	</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
+				<data android:scheme="http"/>
+				<data android:scheme="https"/>
+				<data android:scheme="about"/>
+				<data android:scheme="javascript"/>
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+				<data android:scheme="file" android:pathPattern=".*\\.inform" android:mimeType="application/octet-stream"/>
+				<data android:scheme="content" android:pathPattern=".*\\.inform" android:mimeType="application/octet-stream"/>
+			</intent-filter>
+
+			<!--
+			For these schemes where any of these particular MIME types have been supplied, we are a good candidate.
+			-->
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+				<data android:scheme="http"/>
+				<data android:scheme="https"/>
+				<data android:scheme="inline"/>
+				<data android:mimeType="text/html"/>
+				<data android:mimeType="text/plain"/>
+				<data android:mimeType="application/xhtml+xml"/>
+				<data android:mimeType="application/vnd.wap.xhtml+xml"/>
+			</intent-filter>
+			
+			<!-- We are also the main entry point of the browser. -->
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+				<category android:name="android.intent.category.LAUNCHER"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
+			</intent-filter>
+			
+			<!--
+			The maps app is a much better experience, so it's not worth having this at all... especially for a demo! <intent-filter android:label="Map In Browser"> <action android:name="android.intent.action.VIEW" /> <category android:name="android.intent.category.DEFAULT" /> <data android:mimeType="vnd.android.cursor.item/postal-address" /> </intent-filter>
+			-->
+			<intent-filter>
+				<action android:name="android.intent.action.WEB_SEARCH"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
+				<data android:scheme=""/>
+				<data android:scheme="http"/>
+				<data android:scheme="https"/>
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.MEDIA_SEARCH"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.SEARCH"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+			</intent-filter>
+			
+				
+			<!-- NFC -->
+			<intent-filter>
+			    <action android:name="android.nfc.action.TAG_DISCOVERED"/>
+			    <category android:name="android.intent.category.DEFAULT" />
+			    <data android:mimeType="text/plain" />
+			</intent-filter>
+            <intent-filter>
+			    <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+			    <category android:name="android.intent.category.DEFAULT" />
+			    <data android:mimeType="text/plain" />
+			</intent-filter>
+			<intent-filter>
+			    <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+			    <category android:name="android.intent.category.DEFAULT"/>
+			    <data android:scheme="http" />
+			    <data android:scheme="https"/>
+			</intent-filter>
+			<intent-filter>
+			    <action android:name="android.nfc.action.TECH_DISCOVERED" />
+			    <category android:name="android.intent.category.DEFAULT" />
+			    <data android:mimeType="text/plain" />
+			</intent-filter>          
+			
+            
+		</activity>		    
+    </application>
+
+</manifest>
